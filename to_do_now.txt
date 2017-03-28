@@ -39,9 +39,13 @@ Phase 1
 	     		- I would have a better control of data. Not having to track down what's happened in front-end.
 			C.b: do this in real-time in frontend
 
-	- edit take_snapshot to quarantine skills in master usercopy
+	x edit take_snapshot to quarantine skills in master usercopy
 
-	- finish writing scripts to insert skills
+	x disable skill browser
+	
+	- finish writing scripts to insert skills (gather all active master user_copies)
+	
+	- adjust tag-skills browser based on Q to Erin.
 	
 	- check diffs and refactor code.
 		- use set instead of list
@@ -49,15 +53,13 @@ Phase 1
 		- call observable only once per function
 		- comment explicitly not to delete to-be-unleashed methods
 
-	- document the process and expectations
+	- make tag-skills-modal universal for Ashley's compo
 
 	- identify and remove unused routes related to skills
 	
-	- make tag-skills-modal universal for Ashley's compo
-
-	- disable skill tagger
-
-	- adjust tag-skills browser based on Q to Erin.
+	- re-import, do all the manual tests
+	
+	- document the process and expectations
 
 Between Phases
 	- write a script to override standards with skills' standards
@@ -86,12 +88,19 @@ Unleash when all skills are tagged
 	+ models.RefAsGameboard
 		gather skill info from metadata and transfer to PublishedGameboard as 'categories'
 
+	+ models.InteractiveResourceUserCopy.take_snapshot
+
+	+ models.RefAsGameboard.__init__
+		uncomment 'skill_tags' in lesson_details_field
+
 	+ Skills Browser
 
 Suggestions
 	- consider organizing standards' subject naming
 	- in interactive resources, get standard descriptions only once
 		now it does at least twice(initial load, and tag-skills modal)
+
+	- update of usercopy edition happen in views.py. => should be in the model
 
 
 When a state standard is tagged with skill,

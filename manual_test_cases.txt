@@ -1,0 +1,31 @@
+Import skills using scripts
+
+Insert skills into all master which have been published
+
+-- no effect in production --
+
+Test tag-skill-modal
+	toggle etc...
+	'skills +' are synced
+	item standards are not affected by the change
+	teacher-guide table is not affected by the change
+
+Test lesson-details page and focus skill syncing
+	does not affect search_collection or search after runnin the script
+	metadata.skill_tags change, but doesn't change combine_tags
+	gameboard_search.categories doesn't change
+
+Skill Browser doesn't show
+
+-- unleash full sync --
+	
+	Interactive Platform
+		item's standards sync'ed
+		teacher-guide table sync'ed
+
+	Lesson Details
+		combined_tags change
+		gameboard_search.categories change
+		Search resutls change
+	
+	Skil Browser
