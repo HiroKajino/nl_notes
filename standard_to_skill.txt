@@ -1,0 +1,160 @@
+Phase 1:
+	skills collection created, model class written
+	Tag skills modal
+	Tagged Skills show in author-view items
+
+	Notes:
+		state standards are no longer editable
+		Skill tagging is enabled, but it won't change anything in public users' end
+
+	created but still disabled:
+		displayed standards are sync'ed with tagged skills' standards
+		PublishedGameboard's standards are sync'ed with tagged skills
+		Skill Tagger
+
+	No longer necessary:
+		Standard routes
+		Tag-Standard modal
+
+Schema:
+	= Skill(HierarchicalTag)
+		{
+			id: ObjectId(.....),
+			name: 'Phrases',
+			parent_id: ...,
+			child_ids: [.., ...],
+			depth: ...,
+			parent_names: [],
+			standard_ids : {
+				'ccss': [ccss stanards]...,
+				'sol' : [standard_ids...], etc...
+			}
+		}
+
+	= Copies of Skill/Standard info persists in InteractiveResourceUserCopy
+
+		standard_bank = []
+		skill_bank = []
+
+		item : {
+			{
+				skill_ids = [..., ...,],
+				excluded_stanard_ids= [...,]
+			}
+		}
+		# try avoiding duplicate standard docs by having a bank of all standards and skills
+		# record how much change this brings
+
+		--------
+		{
+			id: ObjectId(.....),
+			name: 'Phrases',
+			parent_id: ...,
+			depth: ...,
+			standard_ids : [array of standard_ids],
+			parent_names: ['Grammar', 'Phrases & Punctuation', 'Phrases'] 
+			# this takes a long time to calculate unless it's pre-added
+			# Avoid having to change previously downloaded lessons. 
+			# interactive page should function w/o querrying Skill collection
+			
+			standards: [<serialized standard doc>, <serialized standard doc>]
+			# consider removing unnecessary fields such as description
+			
+			excluded_standards_ids: []
+
+			focus_skill: True / False # added when it makes it to ref.metadata
+
+		}
+
+		# record how much more space it needs after skills
+
+
+	= No more mapping from CCSS to state standards, only mapping from skill to standards
+		usercopy->sections->columns->items: [
+			{
+				question_type: ....,
+				lexile_levels: ....,
+
+				standards: X
+					# a copy of standard doc
+				skills: {
+					# skill doc + a few added fields 
+					...
+				} 
+
+			},
+			{}...
+		]
+
+	= No change to state standards
+	= keep mapped_standards but not use it anymore
+
+	= Ref & PublishedGameboard
+		- transitions of skil/standards info from user_copy -- ref -- gameboard_search
+									 						\_ edi÷ions 
+		- Gameboard: no change besides that skills' names go into 'category' for search
+		- Ref: skill_tags in 'metadata' 
+			-> I had set this up already
+			-> used in project-details and skills-browser
+
+Ripple effects: 
+	= Skill-tagger
+			- tagging standards from skills
+			- major change in standard tagging
+			- UI stays the same
+
+	= Standard browser
+	= Search
+	= Interactive: Teacher's guides
+
+Transition (we did not talk about this):
+	1. insert skills to all master User Copy right now, keep skills.
+	2. curriculum team will start tagging skills on Hiro's staging-app (or even prod app).
+	
+	-- as long as the changes only affect master user copies and no new master/edition is published,
+	  no effect on user experiences
+
+	Q: What to do with state standards
+		- we will see how fast skill tagging and skill-standard matching happen
+
+	Q: Should I use staging app?
+		- changes can be made only to author-facing features
+
+
+-------
+
+E-team
+	- Skill schema
+		- current design. Standard docs have skill_ids
+		- when added to the item, skill is added additional fields (names, excluded_skills, etc...)
+		- do something similar with skills (skill gets additional fields when added to items)
+
+	- UserCopy schema
+
+	- Ref / PublishedGameboard schema
+		- no need to change too much, and I don't want to touch gameboards_search collection docs
+		- make it work so taht little change to current metadata
+		- keep existing standards info
+
+	- How to transition to the new schema
+		- DB migraiton -> test collection?
+		- co-existing of standards and skills, make one-time change
+		- using staging app for skill-tagging while public app doesn't change.
+
+
+
+
+what to do with current users' copies?
+	- we don't want to make it backward compatible => we would need to change lessons onwed by users
+	- curriculum has to tag with skills without chagning questions first?
+	- what about old versions? we can't go back to every edition to tag with skills
+
+	- old users would lose access to the features that rely on standard
+	- they are prompted to download newer versions.
+
+Ref & Gameboard's schema is changing
+	- check in with Ashley
+
+Transition model?
+	- standards and skills co-exist in lesson item?
+

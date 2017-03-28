@@ -1,0 +1,177 @@
+*****   pdf generation *****
+When a new publish happens, a task is sent to the redis work queue.
+worker.py execute a shell command to generate pdf using phantom.js.
+Phantom.js simulate browser rendering in shell
+
+route is /publish/<master_usercopy_id>/teacher(or student)?...
+
+*****   Deployment procedure   *****
+
+1. Create a pull request from the project branch
+	a. Check the changed files
+3. Resolve conflicts
+	a. pull master branch to the local machine ('git checkout master', then 'git pull')
+	b. merge on local machine.
+	c. conflicts will be shown on the file with '<<<<<<<<' and '>>>>>>>>' added. Resolve.
+	e. merge on local machine.
+4. Push resolved project branch
+5. Merge on GitHub
+<< if it's the models repo >>
+	a. change the vesion in 'setup.py', on 'version' variable
+	b. if there's a change in API calls, change the second #. If it's a fix or minor change, change the third #.
+	c. after pushing and merging, go to GitHub repo, click 'releases' tab.
+	d. create a new release with 'v1.6.0' format.
+	e. no need to add descriptions.
+	f. change the version # on repos whose depend on the new version of the model.
+
+8. Delete project branch on local repo
+6. Pull master on local machine
+7. Push to heroku repo --> this will trigger deployment.
+9. avoid deployment during trainings
+
+
+***** Useful Notes *****
+dashboard_new.html
+L ProjectTabContent.html
+  L gameboard_content.html
+    L gameboard_listview.html
+      L boxcontent.html
+      	L ranking_tool/dashboard/view.html
+
+
+download_tracking:
+- wids: worksheets
+- downloads: gameboard id(gid)
+- interactive: edition_id, ref_id
+
+
++ terminology
+	= Gameboards
+		=> show up in 'dashboard' views
+		=> includes original gameboards that authors wrote
+		=> when written, mark 
+			- published: true => can be downloaded
+			- approved: true => published once, some lessons can be set {published: false}, users have access to unpublished previous lesson that they purchased
+		=> when search for lessons, query Gameboard collection
+		=> set of published lessons will be loaded to GameboardSearch, scheduled task. 
+	
+		=> download
+			=> take a snapshot of published version, override certain fiels, such as owner
+			=> user version of lesson (which is considered a new project): copy of gameboard, copy of rnr
+			=> every project will have its join code
+
+	= RankandReason
+		=> widgit embedded 
+		=> ranking project
+		=> no concept of published, since it's part of gameboard
+
+	= Performance Task
+		=> started as paper/pdf versions
+			=> 'downloading' was just getting links/access to it
+			=> DownloadTracking collection, tracks wids per user
+			=> wids = ids in worksheet id
+
+		=> worksheet
+			=> paper version of PTs
+
+		=> there is a placeholder in gameboard, only with metadata, so that search doens't change.
+
+		=> My-lessons page
+			=> checks DowloandTracking
+			=> look at Gamebaord,
+			=> look at intereactlessons_user_copies
+			=> Gameboard that you 'own' => authored or downloaded before
+
+	= InteractiveResources
+		=> masters
+			- include variables pre-compute
+		=> editions
+			- snapshot of each edition, post-compute
+		=> user_copies
+			- users download editions, user_copies are created.
+		Master & Editions are snapshot, not editable. Only user_copies are editable
+
+		=> refs
+			- metadata between master and editions, kind of like join table
+			- search this in 'Browse All lesson 'page 
+
+		=> RefAsGameboard
+			- there is a model to change interactive_refs to gameboard so that we don't have to change search
+	= join
+		=> for students
+	= own
+		=> for teachers
+	= share(shared interactive resources)
+
+	= gid means Gameboard id
+
+	= you can see who purchased the lessosn in payment_transaction collections
+
+
+When user purchases the lesson...
+# Interactive
+	-> On PaymentTransactions, records interactive_resource_editions doc's id == interactive_resource_user_copy.edition_version_info._id as edition_id
+# Gameboards
+	-> On PaymentTransactions, records gameboard_search doc's id == gameboads doc's id
+
+!! two Interactive lessons with {worksheet: true} and {worksheet: {$exists: false}}, but 
+!! they are both free lesssons, so they shouldn't affeft the system
+
+
+# UserCopy: 
+    # edition_info._id
+    # edition_version_info._id
+    # ref_info._id
+
+# Edition:
+    # _id is the version_info.id
+    # NO references to worksheet
+
+# Refs:
+    # editions[list].versions/published_versions._id
+    # NO references to worksheet
+
+
+# gameboard_serach
+    # _id corresponds with Refs' _id
+    # worksheet _ids
+
+# worksheet
+    # linked_interactive_resource.ref_info._id
+    # linked_interactive_resource.edition_info._id
+
+
+
+Worksheet:
+	/dashboard/worksheet/crime-scene-decoders-alliteration-assonance-with-the-raven/adbe1c
+Paper PT:
+	/dashboard/worksheet/Odd-Animals-Extended/f082dc
+=> 
+@route('/dashboard/worksheet/<worksheet_name_slug>/<truncated_worksheet_id>')
+@route('/dashboard/worksheet/<worksheet_name_slug>/<truncated_worksheet_id>/<edition_id>')
+dashboard_worksheet_download_view(worksheet_name_slug, truncated_worksheet_id, edition_id=None, user_info=None, current_user=None)
+
+PBL: 
+	/dashboard/exploring-animal-communities/d8369c
+Activity:
+	/dashboard/across-the-curriculum-with-jack-and-the-beanstalk/fe00f4
+Project:
+	/dashboard/american-heroes-susan-b-anthony/471623
+Rank and Reason:
+	/dashboard/olympic-athletes-of-2016/1f2676
+=> 
+@route('/dashboard/:projectname_slug/:truncated_gameboard_id')
+def dashboard_permalink(projectname_slug, truncated_gameboard_id, user_info=None, current_user=None):
+
+
+Interactive PT:
+	/interactive/performance-task/5859caedb246540728ed7246/Gaining-Experience-Math
+=> 
+@route('/interactive/performance-task/dl/<worksheet_id>/<title_slug>')
+def interactive_dl_view(worksheet_id, title_slug=None, user_info=None, current_user=None):
+
+@route('/interactive/performance-task/<resource_id>/<title_slug>')
+def interactive_view(resource_id, title_slug=None, user_info=None, current_user=None):
+
+@route('/interactive/performance-task/<resource_id>/<title_slug>/answer_view')
+def interactive_answer_view(resource_id, title_slug=None, user_info=None, current_user=None):

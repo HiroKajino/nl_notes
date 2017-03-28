@@ -1,0 +1,187 @@
+** Erin **
+	Q: Should skill tagger show all skills (anticipating future tagging?) or just the skill
+	   for which at least one standard exists?
+
+** Skill Tagger **
+Phase 1
+	goal: 
+		- curriculum team is able to start tagging skills
+		- no impact to user facing feature
+	x check skill functionality in lesson-details page
+	x include 'focus_skill' field in gameboard_serach.skill_tags (set this up in models)
+	
+	x edit lesson-details page to accomodate new skill structure
+	
+	x auto-exclude unwanted grade during skill insertion to user_copy docs
+
+	x standard description
+	x have standards show up in item section
+
+	x for now, setup standard-retrieval from skills, then disable it for now
+	x teacher's guided
+
+	x how to have standards from skills and old skills coexist in terms of teacher view?
+		- author cannot edit state standards any more.
+		- CCSS should be sync'ed with what author does.
+		- we don't want to keep 'standards' field when standard-tagging is complete
+
+		A: 
+			- When needed in front end, CCSS standards are generated from skills
+			- Old CCSS still exists in document, but won't be used
+
+		B:
+			- New tagging does not sync, meaning item will display old standards
+
+		C: 
+			- When CCSS are changed by the author, it override existing CCSS standards in 'stanards' field
+			- fewer places to re-write code
+	     => C.a: do this in backend script
+	     		- I would have a better control of data. Not having to track down what's happened in front-end.
+			C.b: do this in real-time in frontend
+
+	- edit take_snapshot to quarantine skills in master usercopy
+
+	- finish writing scripts to insert skills
+	
+	- check diffs and refactor code.
+		- use set instead of list
+		- computed to pureComputed
+		- call observable only once per function
+		- comment explicitly not to delete to-be-unleashed methods
+
+	- document the process and expectations
+
+	- identify and remove unused routes related to skills
+	
+	- make tag-skills-modal universal for Ashley's compo
+
+	- disable skill tagger
+
+	- adjust tag-skills browser based on Q to Erin.
+
+Between Phases
+	- write a script to override standards with skills' standards
+	- insert new standard (non-ccss) mapping
+
+Phase 2
+	goal: taggled skills will take effect.
+	- check functions in skills browser
+	- pdg generation
+	- project_details UI
+	- test the process from item tagging all the way to gameboard_search
+
+Unleash when all skills are tagged
+	+ ItemWithSkills
+		__standard_by_category => __standard_by_category_new
+		== displayed standards for the item to sync'ed with new tagging feature
+
+	+ TeacherGuideSection
+		item_with_standards.standards =>  .__computed_standards
+		== standard table
+
+	+ models.ResourceWithItems.get_all_standard_ids
+		enable commented-out code
+		== for teacher-guide section
+
+	+ models.RefAsGameboard
+		gather skill info from metadata and transfer to PublishedGameboard as 'categories'
+
+	+ Skills Browser
+
+Suggestions
+	- consider organizing standards' subject naming
+	- in interactive resources, get standard descriptions only once
+		now it does at least twice(initial load, and tag-skills modal)
+
+
+When a state standard is tagged with skill,
+	- automatically add state standards to existing usercopy.items.skills
+	- the standard info sync in Ref.combined_tags and PublishedGameboard.categories
+
+
+** Other Tasks **
+
+= Write more tests
+	- UserCopy.set/unset_confidence_score_questions
+	- HierarchicalTag.get_all_as_tree()
+	- get_all_skills_w_standards()
+	- has_purchased_lessons / has_payment_record / get_disabled_lessons
+
+= Heroku Migration
+	push to main app
+
+= npm migration
+	- ignore exportsOverride in bower.json and migrate just dependencies (we don't know what they are)
+
+	- Grunt -> standard browser, project platform page
+	- migrating to gulp is a huge task for standard browser
+
+= SKILL TAGGING/BROWSER
+	before deploy
+		- adjust button width on skill-browser: math>measurement>measurement
+		- change 'primary' to 'focus' in 
+			= model tests
+		- add 'focused_skills_only=True' argument in skills-browswer route
+		- import skills again and test (make sure to add parent_names into docs)
+		- change to 'focused_skill' to 'focus_skill'
+
+	Manual Test Cases
+		Skill tagging along with standards
+			v selecting standards, skills, then back to standards, etc...
+				- select skill in one page, unselect, check the other section
+				- skill sync in Tag by Standard
+				- all selected skills show in blue in Tag by Skill
+				- When adding new standards, already-disabled skills show in white
+
+			  lesson details
+				- changes are reflected in lesson-details page after refreshing
+				- all new skills start as other skills
+
+		Skills browser
+			v changing focused skills will after populating search collection in skills-browser and search page
+			v show all skills for which lesson exists
+			v no empty skill categories
+
+		Search page
+			v focused skills are searcheable
+
+
+
+= Metrics (on hold)
+	- districts 
+		basic info
+		show all schools 
+		show all teachers
+		show all students
+		show all lessons used
+
+	- teachers
+		show all downloads w/dates
+		visitations ?
+
+	- lesson
+		downloads, by grade, subjects, district, etc...
+
+	/admin/districts/activity
+		this could be the skeleton of what we want. Info categorized by district > school > user
+		-> link to user info
+
+	/metrics
+		by-project info on download #'s
+
+	/metrics/projects/
+		seems like it's more for settings, not for the number. can't sort by grade or districts, etc...
+
+	/metrics/all-downloads/
+		show # of downloads, but no way to filter/aggreggate
+
+	DB useful info:
+		users: 
+			login_count
+			last_login
+
+		user_copies:
+			submissions: seems to be not used (all docs have 0 to 1 elements)
+
+		submissions:
+			relationship to user_copy is not clear (could not locate user copy with parent_id)
