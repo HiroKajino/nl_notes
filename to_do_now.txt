@@ -1,6 +1,21 @@
-** Erin **
-	Q: Should skill tagger show all skills (anticipating future tagging?) or just the skill
-	   for which at least one standard exists?
+** Duy **
+    vim
+    uploading file to S3
+    any admin flags currently applied to district users?
+    setting up page metrics
+
+<Monday>
+run 'python main.py ela' in nextlesson-models to import data
+will take 20+ min, last time, it caused error with find method, trying this time with find_iter
+
+transfer ownership of 'hiro's lesson
+
+import math
+adjust button width on skill-browser: math>measurement>measurement
+√ remove currently in beta
+
+metrics
+
 
 ** Skill Tagger **
 Phase 1
@@ -43,23 +58,22 @@ Phase 1
 
 	x disable skill browser
 	
-	- finish writing scripts to insert skills (gather all active master user_copies)
+	x finish writing scripts to insert skills (gather all active master user_copies)
 	
-	- adjust tag-skills browser based on Q to Erin.
+	X adjust tag-skills browser based on Q to Erin.
 	
-	- check diffs and refactor code.
-		- use set instead of list
-		- computed to pureComputed
+	x check diffs and refactor code.
+		- use set instead of list (js)
+		- computed to pureComputed (js)
 		- call observable only once per function
-		- comment explicitly not to delete to-be-unleashed methods
 
-	- make tag-skills-modal universal for Ashley's compo
+	x make tag-skills-modal universal for Ashley's compo
 
-	- identify and remove unused routes related to skills
+	x identify and remove unused routes related to skills
 	
 	- re-import, do all the manual tests
 	
-	- document the process and expectations
+	x document the process and expectations
 
 Between Phases
 	- write a script to override standards with skills' standards
@@ -67,12 +81,15 @@ Between Phases
 
 Phase 2
 	goal: taggled skills will take effect.
+
+	- propagate changes in master usercopy to its children edition usercopies
 	- check functions in skills browser
 	- pdg generation
-	- project_details UI
-	- test the process from item tagging all the way to gameboard_search
+	- project_details UI (display of skills)
+	- test the process from item tagging all the way to gameboard_search (it's been tested. just do it again)
 
 Unleash when all skills are tagged
+	-- pacerrabbit --
 	+ ItemWithSkills
 		__standard_by_category => __standard_by_category_new
 		== displayed standards for the item to sync'ed with new tagging feature
@@ -81,19 +98,25 @@ Unleash when all skills are tagged
 		item_with_standards.standards =>  .__computed_standards
 		== standard table
 
+	+ Skills Browser in browse-by-standard.html
+
+	-- models -- 	
 	+ models.ResourceWithItems.get_all_standard_ids
 		enable commented-out code
 		== for teacher-guide section
 
 	+ models.RefAsGameboard
 		gather skill info from metadata and transfer to PublishedGameboard as 'categories'
+		__init__ and construct_tags (switch between old code and new code)
 
 	+ models.InteractiveResourceUserCopy.take_snapshot
+		__remove_all_skills
 
 	+ models.RefAsGameboard.__init__
 		uncomment 'skill_tags' in lesson_details_field
 
-	+ Skills Browser
+	+ models.Gameboard.get_standards()
+		comment out if self.has_interactive_version() clause to draw updated standards
 
 Suggestions
 	- consider organizing standards' subject naming
@@ -107,6 +130,9 @@ When a state standard is tagged with skill,
 	- automatically add state standards to existing usercopy.items.skills
 	- the standard info sync in Ref.combined_tags and PublishedGameboard.categories
 
+
+Issues:
+	- author views items donn't show standard's description on hover if the standards hadn't been a part of the lesson already. (b/c server grabs only descriptions of existing standards)
 
 ** Other Tasks **
 
@@ -125,72 +151,34 @@ When a state standard is tagged with skill,
 	- Grunt -> standard browser, project platform page
 	- migrating to gulp is a huge task for standard browser
 
-= SKILL TAGGING/BROWSER
-	before deploy
-		- adjust button width on skill-browser: math>measurement>measurement
-		- change 'primary' to 'focus' in 
-			= model tests
-		- add 'focused_skills_only=True' argument in skills-browswer route
-		- import skills again and test (make sure to add parent_names into docs)
-		- change to 'focused_skill' to 'focus_skill'
-
-	Manual Test Cases
-		Skill tagging along with standards
-			v selecting standards, skills, then back to standards, etc...
-				- select skill in one page, unselect, check the other section
-				- skill sync in Tag by Standard
-				- all selected skills show in blue in Tag by Skill
-				- When adding new standards, already-disabled skills show in white
-
-			  lesson details
-				- changes are reflected in lesson-details page after refreshing
-				- all new skills start as other skills
-
-		Skills browser
-			v changing focused skills will after populating search collection in skills-browser and search page
-			v show all skills for which lesson exists
-			v no empty skill categories
-
-		Search page
-			v focused skills are searcheable
-
-
 
 = Metrics (on hold)
-	- districts 
-		basic info
-		show all schools 
-		show all teachers
-		show all students
-		show all lessons used
+	1. admin-page:
+		- Do this fist to make it easy to test the above feature
+		- Peruse: edit users' district_admin status
+		- district_access, and site_access_flag
+			- let the user see all users' info within the district
+		- 
+		
+		Add to User document
+			- district_admin_user: T/F
+			- district_access: T/F
+			- district_access: T/F
 
-	- teachers
-		show all downloads w/dates
-		visitations ?
+		:w
 
-	- lesson
-		downloads, by grade, subjects, district, etc...
 
-	/admin/districts/activity
-		this could be the skeleton of what we want. Info categorized by district > school > user
-		-> link to user info
+	2. my-nextlesson page:
+		- add 'district_admin' flag to user doc
+			- make it editable in nl admin page
+		- set is_district_admin func much like is_teacher
+		- insert link for drop down menu
+		- insert an object in my-apps.js that mirrors other comp
+		  i.e. my-lessons & my-classes
+	
+		
+	3. add page metrics to track usage
+	Access Denied page(403):
+		- Any current 403 page?
 
-	/metrics
-		by-project info on download #'s
-
-	/metrics/projects/
-		seems like it's more for settings, not for the number. can't sort by grade or districts, etc...
-
-	/metrics/all-downloads/
-		show # of downloads, but no way to filter/aggreggate
-
-	DB useful info:
-		users: 
-			login_count
-			last_login
-
-		user_copies:
-			submissions: seems to be not used (all docs have 0 to 1 elements)
-
-		submissions:
-			relationship to user_copy is not clear (could not locate user copy with parent_id)
+	Build district_dashboard page

@@ -11,11 +11,14 @@ Test tag-skill-modal
 	teacher-guide table is not affected by the change
 
 Test lesson-details page and focus skill syncing
-	does not affect search_collection or search after runnin the script
-	metadata.skill_tags change, but doesn't change combine_tags
-	gameboard_search.categories doesn't change
+	When adding a new standard though skills...
+		does not affect search_collection or search after runnin the script
+		metadata.skill_tags change, but doesn't change combine_tags
+		gameboard_search.categories doesn't change
 
-Skill Browser doesn't show
+Make edits in master, publish new edition, download the edition and have teachers students use it
+
+v Skill Browser doesn't show
 
 -- unleash full sync --
 	
