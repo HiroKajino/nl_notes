@@ -1,10 +1,19 @@
-==Vim
+==Vim Command Mode
 
 :echo @%
-	show current file
+	show current file pathname
 
 :set showcmd
 	show input in normal mode
+
+:/\c<search_text>
+	case-insensitive search
+
+:<search_range>
+	%   - entire file
+	2,4 - from line 2 to 4
+	.   - current line
+	$   - last line of the file
 
 CTRL-B 
         cursor to beginning of command-line
@@ -15,6 +24,9 @@ CTRL-W      Delete the |word| before the cursor.  This depends on the
 CTRL-U      Remove all characters between the cursor position and
         the beginning of the line.  
 
+== Vim Normal Mode
+'' or ``
+	back to the previous cursor position
 
 ==Bash
 Ctrl + a – go to the start of the command line

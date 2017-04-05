@@ -1,21 +1,12 @@
-** Duy **
-    vim
-    uploading file to S3
-    any admin flags currently applied to district users?
-    setting up page metrics
 
 <Monday>
-run 'python main.py ela' in nextlesson-models to import data
-will take 20+ min, last time, it caused error with find method, trying this time with find_iter
-
-transfer ownership of 'hiro's lesson
-
 import math
 adjust button width on skill-browser: math>measurement>measurement
-√ remove currently in beta
+√ remove currently in beta(done in local repo, not merged)
 
-metrics
-
+district-dashboard
+	- add district_access privilage editing in distrct admin site
+	- redirect /admin access by non NL admin staff
 
 ** Skill Tagger **
 Phase 1
@@ -152,7 +143,8 @@ Issues:
 	- migrating to gulp is a huge task for standard browser
 
 
-= Metrics (on hold)
+
+= Admin Dashboard	
 	1. admin-page:
 		- Do this fist to make it easy to test the above feature
 		- Peruse: edit users' district_admin status
@@ -165,16 +157,9 @@ Issues:
 			- district_access: T/F
 			- district_access: T/F
 
-		:w
-
-
 	2. my-nextlesson page:
-		- add 'district_admin' flag to user doc
-			- make it editable in nl admin page
-		- set is_district_admin func much like is_teacher
-		- insert link for drop down menu
-		- insert an object in my-apps.js that mirrors other comp
-		  i.e. my-lessons & my-classes
+		- UI adjustment
+		- only visible to admin users
 	
 		
 	3. add page metrics to track usage
@@ -182,3 +167,6 @@ Issues:
 		- Any current 403 page?
 
 	Build district_dashboard page
+	
+	* 'user_type' in edit-user-modal (for site admin pag) is recorded in DB as school_district_user_type
+	?: What does 'school_district_account_type' does?
