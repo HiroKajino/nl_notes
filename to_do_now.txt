@@ -1,12 +1,12 @@
+<Friday>
+readon the next requirements in admin-dashboard
+redirect /admin access by non NL admin staff
 
-<Monday>
 import math
 adjust button width on skill-browser: math>measurement>measurement
 √ remove currently in beta(done in local repo, not merged)
 
 district-dashboard
-	- add district_access privilage editing in distrct admin site
-	- redirect /admin access by non NL admin staff
 
 ** Skill Tagger **
 Phase 1
@@ -168,5 +168,104 @@ Issues:
 
 	Build district_dashboard page
 	
-	* 'user_type' in edit-user-modal (for site admin pag) is recorded in DB as school_district_user_type
-	?: What does 'school_district_account_type' does?
+	Questions:
+	- admin dashbaord:
+		* 'user_type' in edit-user-modal (for site admin pag) is recorded in DB as school_district_user_type
+		?: What does 'school_district_account_type' does?
+		?: How do you want to use 'school_district_account_type'? Do you want to base district_admin_user's value on this, for keep them separate?
+		?: If so, chagne edit-user-modal's selection to dropdown.
+		=> any chagnes to school_district_user_type?
+
+	- metrics:
+		? is daily_metrics obsolete?
+		/metrics/daily_metrics/ returns 500
+
+
+	What Metrics are being recorded and ready to be aggregated?
+		Keen:
+		Internal Metrics:
+			
+		Google Analytics:
+			set up in very limited (and obscure) pages and don't understand it well. Ignore this for now.
+
+		What information is useful for the team?
+		Where do we get that info, and aggregate them?
+
+		Admin Dashboard
+			for admin_district:
+				Filter By...
+				date (only possible with users whose 'downloads' fields exist, which are the most users, and I'm guessing they are the newer users) 
+
+			Group By...
+			By Entire District
+			By Site
+			By Teacher
+			By Student
+				=Keen
+				number of times access (Keen, use extraction, ,page-views(page=interactive-view), filter by username
+				number of times going to certain pages (Keen page views, filter by username of teachers)
+				number of times student toggling interest ids (Keen)
+
+				=NL internal DB
+				number of downloaded lessons (--> only in internal metrics)
+				number of students used the lessons(user_copy.last_opened => filter users by students)
+				confidence score results
+				last active use (user_copy.last_opened)
+				number of finished lessons (students submitted their work, user_copy.submissions) 
+
+				=not sure...
+				session duration (we don't know when they leave the page...)
+
+			
+			Needs to be computed prior:
+				list of teachers/users per site
+
+			Site Data Structure(usage) - from which to run query:
+				[
+				{'username':.., 
+				 'usertype': teacher/student,
+				 'district_id': ...,
+				 'school_district_id': ...,
+				 'teacher_ids':...,(for students)
+				 'grades': [.., .., .., ]					
+
+				 'num_of_access(any_lesson)': int, 
+				 'num_of_page_views()': int,
+				 'num_of_intersetid_toggle':int
+
+				 'num_of_downloaded_lessons': int,
+				 'num_of_students_access_to_lessons': int,
+				 'confidence_score_diff_skill': float,
+				 'confidence_score_diff_vision': float,
+				 'last_used': date,
+				 'num_of_completed_lessons'(more than a half of students who started finished): int 
+				]
+
+
+			Implementation Ideas:
+				A.
+				On loading Admin Dashboard->Reports, query the server. Server returns the whole data (either district or site). When querying the server, specify the date range.
+				At the server, the source of the data is defined by fields (either NL Mongo or Keen)
+				Sends back the entire data (list of user information, each user in an object with their numbers) 
+				Filter and grouping happens on the front end
+
+				It's possible to directly query Keen from the browser, but it's more readable and maintainable to have one source of info (the server)
+
+				B.
+				run a query every time search conditions change
+
+				This might be an optimal solution if the data size is not so big. However, with relatively small size of each site / district, A might work. 
+				The sizes of sites/districts are small now, but we don't know how they might expand. Some districts have a very large student body. Would B be a better long term solution?
+				Queries should run fast if the data is pre-computed already. Maybe run a scheduled script to generate usage data and store it in DB?
+
+				Plan:
+				Start workin on B.
+
+		When someone downloads a lesson...
+			route /track_download/....
+
+	Delete the following files when confirmed that it's unnecessary
+	./client/src/common/components/footer-nextlesson.html
+	./client/src/common/components/footer-nextlesson.js
+	./client/src/common/components/header-nextlesson.html
+	./client/src/common/components/header-nextlesson.js

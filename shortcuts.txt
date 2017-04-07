@@ -28,6 +28,13 @@ CTRL-U      Remove all characters between the cursor position and
 '' or ``
 	back to the previous cursor position
 
+A
+	Apppend from the end of the line
+I
+	Insert from the beginning of the line
+s
+	delete the character and insert
+
 ==Bash
 Ctrl + a – go to the start of the command line
 Ctrl + e – go to the end of the command line
