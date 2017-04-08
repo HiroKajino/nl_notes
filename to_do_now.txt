@@ -1,6 +1,10 @@
-<Friday>
-readon the next requirements in admin-dashboard
-redirect /admin access by non NL admin staff
+<Monday>
+Get familiar with Keen api
+Read Keen Doc to get analysis with python code, from where should the query happen (Controller, or Model?)
+Read API Ref -> Compute section for Keen API details
+What is the paid feature in Keen, and what query can I do with them w/o extra charge?
+Start implementing the metrics as a class (see the bottom list)
+Need to setup Keen Read Key
 
 import math
 adjust button width on skill-browser: math>measurement>measurement
@@ -213,32 +217,72 @@ Issues:
 				last active use (user_copy.last_opened)
 				number of finished lessons (students submitted their work, user_copy.submissions) 
 
-				=not sure...
-				session duration (we don't know when they leave the page...)
+				=Leave it for now(too complicated, now focusing on getting skeleton working)
+				num_of_completed_lessons'(more than a half of students who started finished): int 
+				downloaded lessons by type
+				standard coverage
 
+				=not sure how to measure
+				session duration (we don't know when they leave the page...)
+				are they using it right?
+				growth scores
+
+				
 			
 			Needs to be computed prior:
 				list of teachers/users per site
 
-			Site Data Structure(usage) - from which to run query:
+			Admin Dashboard Report Data Structure: Usage- from which to run query:
 				[
 				{'username':.., 
 				 'usertype': teacher/student,
 				 'district_id': ...,
 				 'school_district_id': ...,
-				 'teacher_ids':...,(for students)
-				 'grades': [.., .., .., ]					
+				 'teacher_ids':list (for students)
+				 'grades': list,
+				 'downloaded_lesson_ids': list,
 
+				 #Keen
 				 'num_of_access(any_lesson)': int, 
-				 'num_of_page_views()': int,
-				 'num_of_intersetid_toggle':int
+					# number of access grouped by the user, filtered by a group of users and page-view:interactive-view 
+					analysis type: count
+					collection   : page_views
+					group_by : username
+					filter: page=interactive-view 
+						list of usernames
 
-				 'num_of_downloaded_lessons': int,
+				 'num_of_page_views(any page in NL)': int,
+					# number of access grouped by the user, filtered by a group of users (with any page-visit)
+				 'num_of_intersetid_toggle'(for students):int
+					analysis: count
+					collection: interestid_rating_toggles,
+					group_by: username
+					filter: list of usernames
+					
+
+				 #DB
+				 'num_of_downloaded_lessons': int
 				 'num_of_students_access_to_lessons': int,
 				 'confidence_score_diff_skill': float,
 				 'confidence_score_diff_vision': float,
 				 'last_used': date,
-				 'num_of_completed_lessons'(more than a half of students who started finished): int 
+				]
+
+			
+			Admin Dashboard Report Data Structure: Lesson - from which to run query:
+				This dict is made for every lesson per site (could be duplicates)
+				[
+				{<basic lesson info>,
+				 'teacher_ids': list,
+				 'student_ids': list,
+				 'district_id': _id,
+				 'site_id': _id
+
+				 'num_of_teachers': int,
+
+				 #Only for interactive lessons
+				 'num_of_students'(those who submitted answers'): int,
+				 'num_of_submissions': int,
 				]
 
 
