@@ -1,3 +1,7 @@
+√make copeis of standard doc with correct info
+change standard names in existing documents
+delete old standard documents
+
 <Monday>
 Get familiar with Keen api
 Read Keen Doc to get analysis with python code, from where should the query happen (Controller, or Model?)
@@ -253,12 +257,13 @@ Issues:
 
 				 'num_of_page_views(any page in NL)': int,
 					# number of access grouped by the user, filtered by a group of users (with any page-visit)
+
 				 'num_of_intersetid_toggle'(for students):int
 					analysis: count
 					collection: interestid_rating_toggles,
 					group_by: username
 					filter: list of usernames
-					
+					* Tracking students usage is tricky because there is no direct connections between teachers and studentsc
 
 				 #DB
 				 'num_of_downloaded_lessons': int
