@@ -1,8 +1,9 @@
-√make copeis of standard doc with correct info
-change standard names in existing documents
-delete old standard documents
+<Wed>
+Curr workin on app/admin_metrics_module
+test get_download_count_for_school method now
+keep workin on completing queries
 
-<Monday>
+== Admin Dashboard ==
 Get familiar with Keen api
 Read Keen Doc to get analysis with python code, from where should the query happen (Controller, or Model?)
 Read API Ref -> Compute section for Keen API details
@@ -10,8 +11,18 @@ What is the paid feature in Keen, and what query can I do with them w/o extra ch
 Start implementing the metrics as a class (see the bottom list)
 Need to setup Keen Read Key
 
-import math
-adjust button width on skill-browser: math>measurement>measurement
+== standard doc fix ==
+standard docs k.cc.b.4x are now k.cc.b.4.x
+old docs deleted
+gameboard's categories adjusted (nothing done to published gb since they will be updated automatically)
+
+== standard-to-skill-migration ==
+import math (this is not done becasue there's more fixing to be done. Spreadsheet formart errors have been fixed, but
+Index needs some attention before importing)
+Discussion on Skill Browser button sizes and tag length. 
+	- container width of 1300px is good, and not want to make it much bigger than that.
+	- currently all buttons are the same width (30%). 25%, 25%, 40% makes it look unbalanced. 10% margin is necessary for the look.
+Skill Tagger bug fix -> skills don't collapse when 'Add Skills' is minimized
 √ remove currently in beta(done in local repo, not merged)
 
 district-dashboard
@@ -235,6 +246,10 @@ Issues:
 			
 			Needs to be computed prior:
 				list of teachers/users per site
+			Issue:
+				- Query limit is 100/min. How to get all the site/districts queries?
+				=> stagger them in the scheduled scripts, or raise the limit?
+				- Where should we store Keen query results? -> dedicated or Metrics?
 
 			Admin Dashboard Report Data Structure: Usage- from which to run query:
 				[
