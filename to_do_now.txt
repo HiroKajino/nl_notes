@@ -1,15 +1,26 @@
 
 
-<Wed>
-Test get_student_submission_count
-
+<Tuesday>
+Start with Admin Dashboard
 == Admin Dashboard ==
-Get familiar with Keen api
-Read Keen Doc to get analysis with python code, from where should the query happen (Controller, or Model?)
-Read API Ref -> Compute section for Keen API details
-What is the paid feature in Keen, and what query can I do with them w/o extra charge?
-Start implementing the metrics as a class (see the bottom list)
-Need to setup Keen Read Key
+working on admin_metrics_module.py & utils
+It has two large pools of data to get info from: Sse bottom of document for details
+Just finished setting up generation of keen_page_view and downloaded_lessons.
+
+Next step:
+Add more data to downloaded_lessons
+	submission
+	answers
+	confidencescore
+
+	update download_count methods so that they get lesson_ids from the pool, not by querying UserCopy.
+		- if self.downloaded_lessons don't exist, then do the DB query, much like Keen queries
+check meeting with Erin google document, review what info is exacltly needed.
+check in with Duy about Keen query limit issue
+create aggregation method that gets all the values and parse for front end use.
+organize admin_metrics files into a folder
+start working on the fontend admin_dashboard
+
 
 == standard doc fix ==
 standard docs k.cc.b.4x are now k.cc.b.4.x
@@ -200,6 +211,15 @@ Issues:
 
 
 	What Metrics are being recorded and ready to be aggregated?
+		Data Structure in SiteMericsModule
+			 main info pools for the instance
+			     - keen_page_view (grouped by teacher per page_view)
+			     - lesson_info (grouped by usercopy/gb document)
+				-> include submission, answers, and confidencescore
+			 independent info
+			     - last_login 
+
+
 		Keen:
 		Internal Metrics:
 			
@@ -218,28 +238,6 @@ Issues:
 			By Entire District
 			By Site
 			By Teacher
-			By Student
-				=Keen
-				number of times access (Keen, use extraction, ,page-views(page=interactive-view), filter by username
-				number of times going to certain pages (Keen page views, filter by username of teachers)
-				number of times student toggling interest ids (Keen)
-
-				=NL internal DB
-				number of downloaded lessons (--> only in internal metrics)
-				number of students used the lessons(user_copy.last_opened => filter users by students)
-				confidence score results
-				last active use (user_copy.last_opened)
-				number of finished lessons (students submitted their work, user_copy.submissions) 
-
-				=Leave it for now(too complicated, now focusing on getting skeleton working)
-				num_of_completed_lessons'(more than a half of students who started finished): int 
-				downloaded lessons by type
-				standard coverage
-
-				=not sure how to measure
-				session duration (we don't know when they leave the page...)
-				are they using it right?
-				growth scores
 
 				num_of_intersetid_toggle'(for students):int
 					analysis: count
@@ -251,67 +249,24 @@ Issues:
 				confidence_score_diff_skill': float,
 				confidence_score_diff_vision': float,
 			
-			Needs to be computed prior:
-				list of teachers/users per site
 			Issue:
 				- Query limit is 100/min. How to get all the site/districts queries?
 				=> stagger them in the scheduled scripts, or raise the limit?
 				- Where should we store Keen query results? -> dedicated or Metrics?
 
-			Admin Dashboard Report Data Structure: Activity- from which to run query:
-				* All(NL admin only) -> District -> Site | Information organized by teacher-level
-				[
-				{
-				 ## Info (might be used for display and filter purposes) ##
-				 'username':.., 
-				 'name': ...,
-				 'usertype': teacher/student,
-				 'district_id': ...,
-				 'school_district_id': ...,
-				 'grades': list,
-				 'subjects': list,
-				
-				 ## Columns ##
+			Caching and Keen Query:
+				- 100 queries per min
+				- 227 active site accounts
+				- making query by school_district
 
-				 #Keen
-				 'num_of_access(any_lesson)': int, 
-					# number of access grouped by the user, filtered by a group of users and page-view:interactive-view 
-					analysis type: count
-					collection   : page_views
-					group_by : username
-					filter: page=interactive-view 
-						list of usernames
+				- gather data for 'last 30 days', and 'since account creation' -> make them easy to select
+				- cache results in our DB
+				- for other data range, generate a new search.
 
-				 'num_of_page_views(any page in NL)': int,
-					# number of access grouped by the user, filtered by a group of users (with any page-visit)
+				- seems easier to store data in our own DB, though migration is difficult
 
-				 #DB
-				 'last_log_in'
-				 'num_of_downloaded_lessons': int
-					- sortable by types (PT, projects, etc...)
-					- by subject, grades of the lesson downloded
-				 'num_of_downloaded_interactive_lessons': int
-				 'num_of_students_submission': int
-				]
 
 			
-			Admin Dashboard Report Data Structure: Donwlaods - from which to run query:
-				* All (NL admin only) -> District -> Site | Information organized by lesson-level
-				This dict is made for every lesson per site (could be duplicates)
-				[
-				{<basic lesson info>,
-				 'teacher_ids': list,
-				 'student_ids': list,
-				 'district_id': _id,
-				 'site_id': _id
-
-				 'num_of_teachers': int,
-
-				 #Only for interactive lessons
-				 'num_of_students'(those who submitted answers'): int,
-				 'num_of_submissions': int,
-				]
-
 
 			Implementation Ideas:
 				A.
