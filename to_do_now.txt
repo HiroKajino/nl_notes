@@ -1,26 +1,37 @@
+Q to Erin:
+	What page views are important to track?
+	Do we want to show confidence score?
+	What do you mean 'By Grade Level', 'Product Type', etc...? Can they be colums?
+	What are the colomns and rows of 'Downloads' view?
+	Should submission/answers be part of Downloads or Activity?
+	How to handle active/expired district? How should it affect especially when NL staff sees the dashboard?
 
-
-<Tuesday>
+<Wednesday>
 Start with Admin Dashboard
 == Admin Dashboard ==
-working on admin_metrics_module.py & utils
-It has two large pools of data to get info from: Sse bottom of document for details
-Just finished setting up generation of keen_page_view and downloaded_lessons.
+Experimenting with NLKeen
+Set up API validation in NLKeen model
 
 Next step:
-Add more data to downloaded_lessons
-	submission
-	answers
-	confidencescore
+Metrics modules:
+	create aggregation method that gets all the values and parse for front end use.
+	organize admin_metrics files into a folder
+	start working on the fontend admin_dashboard
+	include ConfidenceScore??
+	
+	set up NL Keen
+		- find out which Keen API to patch
+		- set up DB for NLKeen(dedicated for Metrics?, new one?)
+		- run a script to exract data from Keen
+	
+	What data should we store and update regularly so that it's most useful?
+		- keen_query and downloaded_lessons, and interactive_user_copy_map
+		- Data excactly how it's used in Admin Dashboard?
 
-	update download_count methods so that they get lesson_ids from the pool, not by querying UserCopy.
-		- if self.downloaded_lessons don't exist, then do the DB query, much like Keen queries
-check meeting with Erin google document, review what info is exacltly needed.
-check in with Duy about Keen query limit issue
-create aggregation method that gets all the values and parse for front end use.
-organize admin_metrics files into a folder
-start working on the fontend admin_dashboard
-
+Route & Front End:
+	custom un-authorized access page for dashboard (since there will be a case when admin are not given
+	correct privilage)
+	front end UI
 
 == standard doc fix ==
 standard docs k.cc.b.4x are now k.cc.b.4.x
@@ -28,14 +39,9 @@ old docs deleted
 gameboard's categories adjusted (nothing done to published gb since they will be updated automatically)
 
 == standard-to-skill-migration ==
-import math (this is not done becasue there's more fixing to be done. Spreadsheet formart errors have been fixed, but
-Index needs some attention before importing)
-Discussion on Skill Browser button sizes and tag length. 
+bug fixes are ready to merge. Waiting for Ashley's debug is complete: 4/18
+Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
 	- 20%, 30%, 45% 
-Skill Tagger bug fix -> skills don't collapse when 'Add Skills' is minimized
-√ remove currently in beta(done in local repo, not merged)
-
-district-dashboard
 
 ** Skill Tagger **
 Phase 1
