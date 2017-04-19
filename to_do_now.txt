@@ -1,37 +1,33 @@
 Q to Erin:
 	What page views are important to track?
-	Do we want to show confidence score?
-	What do you mean 'By Grade Level', 'Product Type', etc...? Can they be colums?
-	What are the colomns and rows of 'Downloads' view?
 	Should submission/answers be part of Downloads or Activity?
 	How to handle active/expired district? How should it affect especially when NL staff sees the dashboard?
+
+Q to Duy/Eng. Team
+	When extracting Keen data, should we be concerend about _id collision with internal metrics?
 
 <Wednesday>
 Start with Admin Dashboard
 == Admin Dashboard ==
-Experimenting with NLKeen
-Set up API validation in NLKeen model
+Basic methods created for NLKeen in models.py
+Query methods have been tested, and functional
+extraction and import of data has been tested.
+
+add_event has not been tested => start here.
 
 Next step:
-Metrics modules:
-	create aggregation method that gets all the values and parse for front end use.
-	organize admin_metrics files into a folder
-	start working on the fontend admin_dashboard
-	include ConfidenceScore??
-	
-	set up NL Keen
-		- find out which Keen API to patch
-		- set up DB for NLKeen(dedicated for Metrics?, new one?)
-		- run a script to exract data from Keen
-	
-	What data should we store and update regularly so that it's most useful?
-		- keen_query and downloaded_lessons, and interactive_user_copy_map
-		- Data excactly how it's used in Admin Dashboard?
+Create aggregate methods to give date to front-end
+Don't worry about caching yet
 
-Route & Front End:
-	custom un-authorized access page for dashboard (since there will be a case when admin are not given
-	correct privilage)
-	front end UI
+Start building front end skeleton
+csv extraction of data
+
+Draft Keen migration plan
+
+write scripts to pre-compute data & cache it
+bypass metrics queries when there is a cached data
+cache new data
+
 
 == standard doc fix ==
 standard docs k.cc.b.4x are now k.cc.b.4.x
