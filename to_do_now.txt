@@ -5,6 +5,7 @@ Q to Erin:
 
 Q to Duy/Eng. Team
 	When extracting Keen data, should we be concerend about _id collision with internal metrics?
+	Should we be concerned about keen data increasing load to our DB significantly?
 
 <Wednesday>
 Start with Admin Dashboard
@@ -12,8 +13,10 @@ Start with Admin Dashboard
 Basic methods created for NLKeen in models.py
 Query methods have been tested, and functional
 extraction and import of data has been tested.
+add_event has been tested 
 
-add_event has not been tested => start here.
+changed page_views and download_counts methods to allow dictionary returns
+-> to be used in aggregation
 
 Next step:
 Create aggregate methods to give date to front-end
@@ -21,6 +24,8 @@ Don't worry about caching yet
 
 Start building front end skeleton
 csv extraction of data
+
+Move SiteMetricsModule to models
 
 Draft Keen migration plan
 
