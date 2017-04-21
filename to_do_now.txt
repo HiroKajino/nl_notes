@@ -6,9 +6,9 @@ Q to Erin:
 Q to Duy/Eng. Team
 	When extracting Keen data, should we be concerend about _id collision with internal metrics?
 	Should we be concerned about keen data increasing load to our DB significantly?
+	Adding parent_id index to interactive_resource_answers/submissions 
+	moved the filter logic to server for the consistency. It would look awkward to see different render logic for different tables.
 
-<Wednesday>
-Start with Admin Dashboard
 == Admin Dashboard ==
 Basic methods created for NLKeen in models.py
 Query methods have been tested, and functional
@@ -16,14 +16,36 @@ extraction and import of data has been tested.
 add_event has been tested 
 
 changed page_views and download_counts methods to allow dictionary returns
--> to be used in aggregation
+
+Create aggregate methods to give date to front-end
+
+For testing: user 
+'timothymckenna': active Site Admin with no log in since Aug 2016
+'johnsonmark': active District Admin with no log in since Feb 2017 (one school, 19 teachers)
+mccartytim: '5550d964f43b4d0003a8e8f1' (> 300 teachers)
+dbell704: '56a02a89590e750003cb8e42' (> 600 teachers)
+
+DistrictMetricsModule
+
+Address timeout issue (for big districts, we can't retrieve the data quickly enough for table view)
+
+Now:
+
+<Start here on Monday>=> build table with ko template
+tested table view.
+switching between different sctions doesn't properly work yet.
+build filter and sort functions
+
+How to generate pretty header names?
+show teacher info on hovering over their names
+insert css class based on the data_type of each row
+Display district and site name
+drop down select of site (if there is district privilage)
+
+csv extraction of data
 
 Next step:
-Create aggregate methods to give date to front-end
 Don't worry about caching yet
-
-Start building front end skeleton
-csv extraction of data
 
 Move SiteMetricsModule to models
 
@@ -33,7 +55,7 @@ write scripts to pre-compute data & cache it
 bypass metrics queries when there is a cached data
 cache new data
 
-
+adjust last_login time depending on the region
 == standard doc fix ==
 standard docs k.cc.b.4x are now k.cc.b.4.x
 old docs deleted
@@ -43,6 +65,49 @@ gameboard's categories adjusted (nothing done to published gb since they will be
 bug fixes are ready to merge. Waiting for Ashley's debug is complete: 4/18
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
 	- 20%, 30%, 45% 
+
+Follwoing skills were invalid.
+['W.11-12.8', ['writing', 'research', 'synthesizing_multiple_sources']]
+['SL.11-12.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.11-12.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+
+['RL.3.4', ['reading_foundational', 'comprehension', 'context_clues']]
+['W.3.1', ['writing', 'opinion_&_argument', 'state_opinion_slash_claim']]
+['W.3.7', ['writing', 'research', 'synthesizing_multiple_sources']]
+['W.3.8', ['writing', 'research', 'synthesizing_multiple_sources']]
+['SL.3.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['L.3.1.I', ['grammar', 'sentences', 'complex_senteces']]
+['L.3.6', ['writing', 'informative_slash_explanatory', 'precise_and_domain_specific_vocabulary_']]
+
+['RL.4.4', ['reading_foundational', 'comprehension', 'context_clues']]
+['RI.4.7', ['reading_informational', 'illustrations', 'using_illustrations']]
+['W.4.7', ['writing', 'research', 'synthesizing_multiple_sources']]
+['W.4.8', ['writing', 'research', 'synthesizing_multiple_sources']]
+['SL.4.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.4.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+['L.4.3.C', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+
+['RL.5.4', ['reading_foundational', 'comprehension', 'context_clues']]
+['W.5.7', ['writing', 'research', 'synthesizing_multiple_sources']]
+['W.5.8', ['writing', 'research', 'synthesizing_multiple_sources']]
+['SL.5.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.5.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+['L.5.6', ['writing', 'informative_slash_explanatory', 'precise_and_domain_specific_vocabulary_']]
+
+['RI.6.6', ['reading_informational', 'author_apostrophe_s_purpose', 'annalogies_or_allusions']]
+['SL.6.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.6.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+
+['SL.7.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.7.1.A', ['writing', 'research', 'shared_research_and_writing_projects']]
+['SL.7.1.B', ['define_individual_roles_as_needed']]
+['SL.7.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+
+['SL.8.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.8.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
+
+['SL.9-10.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
+['SL.9-10.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
 
 ** Skill Tagger **
 Phase 1
