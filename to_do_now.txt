@@ -29,12 +29,17 @@ DistrictMetricsModule
 
 Address timeout issue (for big districts, we can't retrieve the data quickly enough for table view)
 
-Now:
-
-<Start here on Monday>=> build table with ko template
+build table with ko template
 tested table view.
 switching between different sctions doesn't properly work yet.
-build filter and sort functions
+sort functions
+make sites selectables
+<workon on this now> => filter by site
+selecting of district and site have been set up, but it does not apply filter to the table.
+
+loading logo
+setting view
+teacher info shown on hover
 
 How to generate pretty header names?
 show teacher info on hovering over their names
@@ -62,7 +67,27 @@ old docs deleted
 gameboard's categories adjusted (nothing done to published gb since they will be updated automatically)
 
 == standard-to-skill-migration ==
-bug fixes are ready to merge. Waiting for Ashley's debug is complete: 4/18
+Support Ticket:
+Saving of interactive lessons fail due to the increased size of document after inserting skills info.
+usercopy_id: 57e4bb2f64050900030473d8
+bsonsize w/ skills: 794, loading time 0.01 sec
+bsonsize wo skills: around 1100, loadingtime 38 sec
+LZString parsing fails after a certain size.
+It's suspected that math lessons are unaffected due to smaller doc sizes. After Laura updated ELA skill index,
+the more complex skill-standard relationshop might have caused the increased file size.
+
+Plan: reduce file size by not including all the standard infomation
+
+Files to work on:
+	models.py: Skill.data_with_additioinal...
+	frontend: how to capture standard info...
+		-> how much should we change this?
+		-> There are many other parts of the interactive lessons that will be affected.
+			- through out interactive platform
+			- propagation to ref and gameboard_search (this will involve construct_tag)
+		-> would it be worth it to just change data_with_additional... and leave the frontend part for later?
+		-> if I strip the standard doc within skills down to {_id: ...}, then I shouldn't have to change anything in front end?
+
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
 	- 20%, 30%, 45% 
 
