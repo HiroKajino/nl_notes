@@ -25,8 +25,6 @@ For testing: user
 mccartytim: '5550d964f43b4d0003a8e8f1' (> 300 teachers)
 dbell704: '56a02a89590e750003cb8e42' (> 600 teachers)
 
-DistrictMetricsModule
-
 Address timeout issue (for big districts, we can't retrieve the data quickly enough for table view)
 
 build table with ko template
@@ -70,8 +68,8 @@ gameboard's categories adjusted (nothing done to published gb since they will be
 Support Ticket:
 Saving of interactive lessons fail due to the increased size of document after inserting skills info.
 usercopy_id: 57e4bb2f64050900030473d8
-bsonsize w/ skills: 794, loading time 0.01 sec
-bsonsize wo skills: around 1100, loadingtime 38 sec
+bsonsize w/ skills: len(bef) 1573927 loading time 0.01 sec
+bsonsize wo skills: len(aft)  217190, loadingtime 38 sec
 LZString parsing fails after a certain size.
 It's suspected that math lessons are unaffected due to smaller doc sizes. After Laura updated ELA skill index,
 the more complex skill-standard relationshop might have caused the increased file size.
@@ -88,51 +86,14 @@ Files to work on:
 		-> would it be worth it to just change data_with_additional... and leave the frontend part for later?
 		-> if I strip the standard doc within skills down to {_id: ...}, then I shouldn't have to change anything in front end?
 
+with only _id and grade info, the str len is 675578
+15 sec for doc str length of  811543
+20 sed for doc str length of  880211
+0.5 sec for doc str length of 675578 
+
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
 	- 20%, 30%, 45% 
 
-Follwoing skills were invalid.
-['W.11-12.8', ['writing', 'research', 'synthesizing_multiple_sources']]
-['SL.11-12.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.11-12.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-
-['RL.3.4', ['reading_foundational', 'comprehension', 'context_clues']]
-['W.3.1', ['writing', 'opinion_&_argument', 'state_opinion_slash_claim']]
-['W.3.7', ['writing', 'research', 'synthesizing_multiple_sources']]
-['W.3.8', ['writing', 'research', 'synthesizing_multiple_sources']]
-['SL.3.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['L.3.1.I', ['grammar', 'sentences', 'complex_senteces']]
-['L.3.6', ['writing', 'informative_slash_explanatory', 'precise_and_domain_specific_vocabulary_']]
-
-['RL.4.4', ['reading_foundational', 'comprehension', 'context_clues']]
-['RI.4.7', ['reading_informational', 'illustrations', 'using_illustrations']]
-['W.4.7', ['writing', 'research', 'synthesizing_multiple_sources']]
-['W.4.8', ['writing', 'research', 'synthesizing_multiple_sources']]
-['SL.4.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.4.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-['L.4.3.C', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-
-['RL.5.4', ['reading_foundational', 'comprehension', 'context_clues']]
-['W.5.7', ['writing', 'research', 'synthesizing_multiple_sources']]
-['W.5.8', ['writing', 'research', 'synthesizing_multiple_sources']]
-['SL.5.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.5.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-['L.5.6', ['writing', 'informative_slash_explanatory', 'precise_and_domain_specific_vocabulary_']]
-
-['RI.6.6', ['reading_informational', 'author_apostrophe_s_purpose', 'annalogies_or_allusions']]
-['SL.6.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.6.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-
-['SL.7.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.7.1.A', ['writing', 'research', 'shared_research_and_writing_projects']]
-['SL.7.1.B', ['define_individual_roles_as_needed']]
-['SL.7.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-
-['SL.8.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.8.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
-
-['SL.9-10.1', ['speaking_&_listening', 'comprehension', 'adding_details']]
-['SL.9-10.6', ['speaking_&_listening', 'presentation', 'formal_discourse']]
 
 ** Skill Tagger **
 Phase 1
@@ -204,6 +165,9 @@ Phase 2
 	- pdg generation
 	- project_details UI (display of skills)
 	- test the process from item tagging all the way to gameboard_search (it's been tested. just do it again)
+
+	- change front end logic to display standards. Now standards only carry '_id' and 'grade'. This is a new change,
+	  and no work has been done to accomodate this.
 
 Unleash when all skills are tagged
 	-- pacerrabbit --
