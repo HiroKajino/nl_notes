@@ -22,6 +22,7 @@ Create aggregate methods to give date to front-end
 For testing: user 
 'timothymckenna': active Site Admin with no log in since Aug 2016
 'johnsonmark': active District Admin with no log in since Feb 2017 (one school, 19 teachers)
+google_user_115015740167916232812: 559d7a39e08e70000332410a (16 teachers, 7 districts)
 mccartytim: '5550d964f43b4d0003a8e8f1' (> 300 teachers)
 dbell704: '56a02a89590e750003cb8e42' (> 600 teachers)
 
@@ -32,18 +33,18 @@ tested table view.
 switching between different sctions doesn't properly work yet.
 sort functions
 make sites selectables
-<workon on this now> => filter by site
-selecting of district and site have been set up, but it does not apply filter to the table.
+filter by site
+
+<Start From Here Thursday>
+add 'teacher_name' into the get_headers functions so that it doesn't appear in district view
+click school and that school is selected
 
 loading logo
-setting view
 teacher info shown on hover
+grouping logic for 'date' data_type
 
 How to generate pretty header names?
-show teacher info on hovering over their names
 insert css class based on the data_type of each row
-Display district and site name
-drop down select of site (if there is district privilage)
 
 csv extraction of data
 
