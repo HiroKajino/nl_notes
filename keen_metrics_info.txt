@@ -1,0 +1,24 @@
+search_queries
+	- record_employee_events: false
+	- no other conditions
+
+page_views/page_views.lesson_details
+	- record_employee_events: false
+	- only when...
+		+ user has district license
+		+ user has OOPS
+		+ user has purchased something (has customer id)
+
+interestid_rating_toggles
+	- record_employee_events: false
+	- didn't really understand
+
+previews
+	- record_employee_events: false
+	- no other conditions
+
+class_sync
+	- currently no data
+
+logins
+	- record_employee_events: true

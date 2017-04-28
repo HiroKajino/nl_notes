@@ -11,10 +11,12 @@ Q to Erin:
 	How to handle active/expired district? How should it affect especially when NL staff sees the dashboard?
 
 Q to Duy/Eng. Team
-	When extracting Keen data, should we be concerend about _id collision with internal metrics?
 	Should we be concerned about keen data increasing load to our DB significantly?
 	Adding parent_id index to interactive_resource_answers/submissions 
-	moved the filter logic to server for the consistency. It would look awkward to see different render logic for different tables.
+	Keen.page_views => should we be recording events by non-paying users? Why not record other views?
+
+	Japan visit and baby plan
+
 
 == Admin Dashboard ==
 Basic methods created for NLKeen in models.py
@@ -52,34 +54,45 @@ Draft Keen migration plan
 		= There will be no difference for user experience.
 		= Check to see if tracking data is coming in.
 
-=> Start Here on Friday
+=Keen=
 	- Once NLKeen tracking starts, starg migrating Keen data to our DB.
 		= keep querying
 
 	- Then chagne keen_query.py so get the data from NL DB
-
-	- write scripts to pre-compute data & cache it
-	- bypass metrics queries when there is a cached data
-
-	- investigate what events are recorded and its criteria for accurate metrics (especially page_views)
-		-> Are there obsolete metrics?
-
-add student's log in history from class and lessons
+		=> test locally -> can't test admin-dashboard locally b/c no user collection locally
+		=> run the script to the productin DB
+			+ page_views are the only necessary one for admin-dashboard
+		=> with some data, start testing on staging
 
 =Front End=
 UI:
+<start here Monday>	bug: when select the school/teacher, numbers don't update correctly 
 	teacher info on hover
 	pretty table header names
 	header info order
 	don't show ugly stuff while loading
+	change admin-dashboard privilage filter to admin_site & admin_district instead of usertype
+	align dashboard icon with the square.
 
 csv export
 
-daterage selector
+=More feature=
+Date Range:
+	daterage selector in front end
+	make timeframe able to take objects in addition to string 
+
+add student's log in history from class and lessons as part of activity
 
 Access denied page
 
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
+
+- determine if caching is necessary
+	=> watch for performance
+	=> if necessary, bypass metrics queries when there is a cached data 
+	=> write scripts to pre-compute data & cache it
+
+
 
 == standard doc fix ==
 standard docs k.cc.b.4x are now k.cc.b.4.x
@@ -87,32 +100,6 @@ old docs deleted
 gameboard's categories adjusted (nothing done to published gb since they will be updated automatically)
 
 == standard-to-skill-migration ==
-Support Ticket:
-Saving of interactive lessons fail due to the increased size of document after inserting skills info.
-usercopy_id: 57e4bb2f64050900030473d8
-bsonsize w/ skills: len(bef) 1573927 loading time 0.01 sec
-bsonsize wo skills: len(aft)  217190, loadingtime 38 sec
-LZString parsing fails after a certain size.
-It's suspected that math lessons are unaffected due to smaller doc sizes. After Laura updated ELA skill index,
-the more complex skill-standard relationshop might have caused the increased file size.
-
-Plan: reduce file size by not including all the standard infomation
-
-Files to work on:
-	models.py: Skill.data_with_additioinal...
-	frontend: how to capture standard info...
-		-> how much should we change this?
-		-> There are many other parts of the interactive lessons that will be affected.
-			- through out interactive platform
-			- propagation to ref and gameboard_search (this will involve construct_tag)
-		-> would it be worth it to just change data_with_additional... and leave the frontend part for later?
-		-> if I strip the standard doc within skills down to {_id: ...}, then I shouldn't have to change anything in front end?
-
-with only _id and grade info, the str len is 675578
-15 sec for doc str length of  811543
-20 sed for doc str length of  880211
-0.5 sec for doc str length of 675578 
-
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
 	- 20%, 30%, 45% 
 
@@ -245,136 +232,14 @@ Issues:
 	- get_all_skills_w_standards()
 	- has_purchased_lessons / has_payment_record / get_disabled_lessons
 
-= Heroku Migration
-	push to main app
-
 = npm migration
 	- ignore exportsOverride in bower.json and migrate just dependencies (we don't know what they are)
 
 	- Grunt -> standard browser, project platform page
 	- migrating to gulp is a huge task for standard browser
 
-
-
-= Admin Dashboard	
-	1. admin-page:
-		- Do this fist to make it easy to test the above feature
-		- Peruse: edit users' district_admin status
-		- district_access, and site_access_flag
-			- let the user see all users' info within the district
-		- 
-		
-		Add to User document
-			- district_admin_user: T/F
-			- district_access: T/F
-			- district_access: T/F
-
-	2. my-nextlesson page:
-		- UI adjustment
-		- only visible to admin users
-	
-		
-	3. add page metrics to track usage
-	Access Denied page(403):
-		- Any current 403 page?
-
-	Build district_dashboard page
-	
-	Questions:
-	- admin dashbaord:
-		* 'user_type' in edit-user-modal (for site admin pag) is recorded in DB as school_district_user_type
-		?: What does 'school_district_account_type' does?
-		?: How do you want to use 'school_district_account_type'? Do you want to base district_admin_user's value on this, for keep them separate?
-		?: If so, chagne edit-user-modal's selection to dropdown.
-		=> any chagnes to school_district_user_type?
-
-	- metrics:
-		? is daily_metrics obsolete?
-		/metrics/daily_metrics/ returns 500
-
-
-	What Metrics are being recorded and ready to be aggregated?
-		Data Structure in SiteMericsModule
-			 main info pools for the instance
-			     - keen_page_view (grouped by teacher per page_view)
-			     - lesson_info (grouped by usercopy/gb document)
-				-> include submission, answers, and confidencescore
-			 independent info
-			     - last_login 
-
-
-		Keen:
-		Internal Metrics:
-			
-		Google Analytics:
-			set up in very limited (and obscure) pages and don't understand it well. Ignore this for now.
-
-		What information is useful for the team?
-		Where do we get that info, and aggregate them?
-
-		Admin Dashboard
-			for admin_district:
-				Filter By...
-				date (only possible with users whose 'downloads' fields exist, which are the most users, and I'm guessing they are the newer users) 
-
-			Group By...
-			By Entire District
-			By Site
-			By Teacher
-
-				num_of_intersetid_toggle'(for students):int
-					analysis: count
-					collection: interestid_rating_toggles,
-					group_by: username
-					filter: list of usernames
-					* Tracking students usage is tricky because there is no direct connections between teachers and studentsc
-				
-				confidence_score_diff_skill': float,
-				confidence_score_diff_vision': float,
-			
-			Issue:
-				- Query limit is 100/min. How to get all the site/districts queries?
-				=> stagger them in the scheduled scripts, or raise the limit?
-				- Where should we store Keen query results? -> dedicated or Metrics?
-
-			Caching and Keen Query:
-				- 100 queries per min
-				- 227 active site accounts
-				- making query by school_district
-
-				- gather data for 'last 30 days', and 'since account creation' -> make them easy to select
-				- cache results in our DB
-				- for other data range, generate a new search.
-
-				- seems easier to store data in our own DB, though migration is difficult
-
-
-			
-
-			Implementation Ideas:
-				A.
-				On loading Admin Dashboard->Reports, query the server. Server returns the whole data (either district or site). When querying the server, specify the date range.
-				At the server, the source of the data is defined by fields (either NL Mongo or Keen)
-				Sends back the entire data (list of user information, each user in an object with their numbers) 
-				Filter and grouping happens on the front end
-
-				It's possible to directly query Keen from the browser, but it's more readable and maintainable to have one source of info (the server)
-
-				B.
-				run a query every time search conditions change
-
-				This might be an optimal solution if the data size is not so big. However, with relatively small size of each site / district, A might work. 
-				The sizes of sites/districts are small now, but we don't know how they might expand. Some districts have a very large student body. Would B be a better long term solution?
-				Queries should run fast if the data is pre-computed already. Maybe run a scheduled script to generate usage data and store it in DB?
-
-				Plan:
-				Start workin on B.
-
-		When someone downloads a lesson...
-			route /track_download/....
-
-	Delete the following files when confirmed that it's unnecessary
-	./client/src/common/components/footer-nextlesson.html
-	./client/src/common/components/footer-nextlesson.js
-	./client/src/common/components/header-nextlesson.html
-	./client/src/common/components/header-nextlesson.js
+Delete the following files when confirmed that it's unnecessary
+./client/src/common/components/footer-nextlesson.html
+./client/src/common/components/footer-nextlesson.js
+./client/src/common/components/header-nextlesson.html
+./client/src/common/components/header-nextlesson.js
