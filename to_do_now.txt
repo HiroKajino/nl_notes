@@ -66,7 +66,7 @@ Draft Keen migration plan
 
 =Front End=
 UI:
-<start here Monday>	bug: when select the school/teacher, numbers don't update correctly 
+<start here Monday>	bug: when select the school/teacher, numbers don't update correctly -> for some reason table_data is getting eddited when they are grouped.
 	teacher info on hover
 	pretty table header names
 	header info order
