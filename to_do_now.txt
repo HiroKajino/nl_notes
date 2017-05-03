@@ -78,15 +78,22 @@ Backend:
 
 Date Range:
 	make timeframe able to take objects in addition to string 
-<Tuesday>
-done up here.
-model has not been merged. do this to test on staging app.
 
 UI:
 	data-range selector
-	workon summary section above the tables
 	pretty table header names
 	header info order
+
+need to make new release of models before testing on staging.
+<Wednesday>
+	* test staging app
+	* identify design priority of Erin's mock
+	* make Q's ready for the meeting
+
+implement Erin's mock:
+
+district/school view selectable for all users?
+
 
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
 Database Performance (Index and cache)
