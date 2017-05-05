@@ -1,13 +1,4 @@
 Q to Erin:
-	UI design on admin-dashboard 
-		fixed width
-	admin_site/district flag necessary? Could we just use 'school_district_user_type' field? => yes, necessary
-	
-	todo:
-	change admin-dashboard privilage filter to admin_site & admin_district instead of usertype
-	align dashboard icon with the square.
-
-	What page views are important to track?
 	How to handle active/expired district? How should it affect especially when NL staff sees the dashboard?
 
 Q to Duy/Eng. Team
@@ -84,36 +75,49 @@ UI:
 	pretty table header names
 	header info order
 
-need to make new release of models before testing on staging.
-<Wednesday>
-	* test staging app
-	* identify design priority of Erin's mock
-	* make Q's ready for the meeting
+	implement Erin's mock:
 
-implement Erin's mock:
+	All users start from 'dsitrict' layer
+	dropdown date-selector
 
-district/school view selectable for all users?
-
+<start here>
 
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
 Database Performance (Index and cache)
 	=> use explain() command to see performance
 	=> add indeces
-		- nl_keen_page_views by username
 		- nl_keen_page_views by username + page
+			ensureIndex({username: 1, page: 1})	
+			in local mongo server, adding keen.created_at condition did not change query speed.
+			NLKeenPageView.TABLE.ensure_index([('username', 1), ('page', 1), ('keen.created_at', 1)])
 		- interactive_resources_submissions/answers by parent_id
-	=> consider change iteration after inserting index (find by parent_id, then filter by timeframe)
+	=> consider change iteration after inserting index (find by parent_id, then filter by timeframe) -> unnecessary
 	=> if necessary, bypass metrics queries when there is a cached data 
 	=> write scripts to pre-compute data & cache it
+
+	more on performance:
+		refactor get_page_views method: instead of going through the records many times, generate results with one iteration.
+
+UI:
+	include % in stats
+	When I get more info from Erin, finish it up.
+	UI compo:
+		sidebar
+		stats compo
+		school logo
+		data-info alignment
+
+only 'teacher' users are included in the table & stats
+	- 'no_of_active_teachers' should only include school_district_user_type='teacher'
+	- other users should be included so that NL peoplpe can see admin users' usage
+		=> filter should be applied in frontend
+
 
 =Not urgent yet=
 Setting section?
 Access denied page
 
 == standard doc fix ==
-standard docs k.cc.b.4x are now k.cc.b.4.x
-old docs deleted
-gameboard's categories adjusted (nothing done to published gb since they will be updated automatically)
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
@@ -247,6 +251,11 @@ Issues:
 	- HierarchicalTag.get_all_as_tree()
 	- get_all_skills_w_standards()
 	- has_purchased_lessons / has_payment_record / get_disabled_lessons
+
+
+= ConfidenceScore
+	ConfidenceScore, instead of username, show student's actual name
+	change 'vision' to 'Real World Connection'
 
 = npm migration
 	- ignore exportsOverride in bower.json and migrate just dependencies (we don't know what they are)
