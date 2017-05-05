@@ -1,5 +1,6 @@
 Q to Erin:
 	How to handle active/expired district? How should it affect especially when NL staff sees the dashboard?
+	Is last updated necessary?
 
 Q to Duy/Eng. Team
 	Keen.page_views => should we be recording events by non-paying users? Why not record other views?
@@ -80,38 +81,28 @@ UI:
 	All users start from 'dsitrict' layer
 	dropdown date-selector
 
-<start here>
-
-User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
 Database Performance (Index and cache)
-	=> use explain() command to see performance
-	=> add indeces
-		- nl_keen_page_views by username + page
-			ensureIndex({username: 1, page: 1})	
-			in local mongo server, adding keen.created_at condition did not change query speed.
-			NLKeenPageView.TABLE.ensure_index([('username', 1), ('page', 1), ('keen.created_at', 1)])
-		- interactive_resources_submissions/answers by parent_id
-	=> consider change iteration after inserting index (find by parent_id, then filter by timeframe) -> unnecessary
 	=> if necessary, bypass metrics queries when there is a cached data 
 	=> write scripts to pre-compute data & cache it
 
-	more on performance:
-		refactor get_page_views method: instead of going through the records many times, generate results with one iteration.
-
 UI:
+	Set min-width on stats-container so that they don't wrap into 3 rows.
+	in district view, show teacher's school in addition to their names.
+	school logo w/ district (or shool) name that doesn't change
+	teacher avatar
+	make sure font is accurate
 	include % in stats
-	When I get more info from Erin, finish it up.
-	UI compo:
-		sidebar
-		stats compo
-		school logo
-		data-info alignment
 
 only 'teacher' users are included in the table & stats
 	- 'no_of_active_teachers' should only include school_district_user_type='teacher'
 	- other users should be included so that NL peoplpe can see admin users' usage
 		=> filter should be applied in frontend
 
+User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
+more on performance:
+	refactor get_page_views method: instead of going through the records many times, generate results with one iteration.
+	server still times out with very large data (like Mrs.Bell's district with 'since_account_creation') tag.
+		=> set up error message for too large data just in case.
 
 =Not urgent yet=
 Setting section?

@@ -1,0 +1,271 @@
+Query:
+	 db.getCollection('nl_keen_page_views').find({
+		$and: [
+			{username: {$in: ['hirostudent1', 'hiro']}},
+			{'keen.created_at': {$gte: ISODate('2016-10-05T16:33:49.670077')}},
+			{'keen.created_at': {$lte: ISODate('2017-05-05T16:33:49.670077')}}
+		]
+	}).explain()
+
+
+	<No index>
+		{
+			"cursor" : "BasicCursor",
+			"isMultiKey" : false,
+			"n" : 11,
+			"nscannedObjects" : 549545,
+			"nscanned" : 549545,
+			"nscannedObjectsAllPlans" : 549545,
+			"nscannedAllPlans" : 549545,
+			"scanAndOrder" : false,
+			"indexOnly" : false,
+			"nYields" : 4294,
+			"nChunkSkips" : 0,
+			"millis" : 817,
+			"server" : "Hiros-MacBook-Air.local:27017",
+			"filterSet" : false
+		}  
+
+	<username_1>
+		{
+			"cursor" : "BtreeCursor username_1",
+			"isMultiKey" : false,
+			"n" : 11,
+			"nscannedObjects" : 11,
+			"nscanned" : 11,
+			"nscannedObjectsAllPlans" : 11,
+			"nscannedAllPlans" : 11,
+			"scanAndOrder" : false,
+			"indexOnly" : false,
+			"nYields" : 0,
+			"nChunkSkips" : 0,
+			"millis" : 6,
+			"indexBounds" : {
+				"username" : [ 
+					[ 
+						"hiro", 
+						"hiro"
+					], 
+					[ 
+						"hirostudent1", 
+						"hirostudent1"
+					]
+				]
+			},
+			"server" : "Hiros-MacBook-Air.local:27017",
+			"filterSet" : false
+		}
+	
+	<username_1, username_1_keen_created_at_1>
+	{
+		"cursor" : "BtreeCursor username_1_keen.created_at_1",
+		"isMultiKey" : false,
+		"n" : 11,
+		"nscannedObjects" : 11,
+		"nscanned" : 11,
+		"nscannedObjectsAllPlans" : 22,
+		"nscannedAllPlans" : 22,
+		"scanAndOrder" : false,
+		"indexOnly" : false,
+		"nYields" : 0,
+		"nChunkSkips" : 0,
+		"millis" : 3,
+		"indexBounds" : {
+			"username" : [ 
+				[ 
+					"hiro", 
+					"hiro"
+				], 
+				[ 
+					"hirostudent1", 
+					"hirostudent1"
+				]
+			],
+			"keen.created_at" : [ 
+				[ 
+					ISODate("2016-10-05T16:33:49.670Z"), 
+					ISODate("2017-05-05T16:33:49.670Z")
+				]
+			]
+		},
+		"server" : "Hiros-MacBook-Air.local:27017",
+		"filterSet" : false
+	}
+
+	<username_1_keen_created_at_1>
+	{
+		"cursor" : "BtreeCursor username_1_keen.created_at_1",
+		"isMultiKey" : false,
+		"n" : 11,
+		"nscannedObjects" : 11,
+		"nscanned" : 11,
+		"nscannedObjectsAllPlans" : 11,
+		"nscannedAllPlans" : 11,
+		"scanAndOrder" : false,
+		"indexOnly" : false,
+		"nYields" : 0,
+		"nChunkSkips" : 0,
+		"millis" : 0,
+		"indexBounds" : {
+			"username" : [ 
+				[ 
+					"hiro", 
+					"hiro"
+				], 
+				[ 
+					"hirostudent1", 
+					"hirostudent1"
+				]
+			],
+			"keen.created_at" : [ 
+				[ 
+					ISODate("2016-10-05T16:33:49.670Z"), 
+					ISODate("2017-05-05T16:33:49.670Z")
+				]
+			]
+		},
+		"server" : "Hiros-MacBook-Air.local:27017",
+		"filterSet" : false
+	}
+
+	<username_1 & keen_created_at_1>
+	 {
+		"cursor" : "BtreeCursor username_1",
+		"isMultiKey" : false,
+		"n" : 11,
+		"nscannedObjects" : 11,
+		"nscanned" : 11,
+		"nscannedObjectsAllPlans" : 23,
+		"nscannedAllPlans" : 23,
+		"scanAndOrder" : false,
+		"indexOnly" : false,
+		"nYields" : 0,
+		"nChunkSkips" : 0,
+		"millis" : 0,
+		"indexBounds" : {
+			"username" : [ 
+				[ 
+					"hiro", 
+					"hiro"
+				], 
+				[ 
+					"hirostudent1", 
+					"hirostudent1"
+				]
+			]
+		},
+		"server" : "Hiros-MacBook-Air.local:27017",
+		"filterSet" : false
+	}
+
+
+
+
+	====
+	 {
+		"cursor" : "BasicCursor",
+		"isMultiKey" : false,
+		"n" : 0,
+		"nscannedObjects" : 385387,
+		"nscanned" : 385387,
+		"nscannedObjectsAllPlans" : 385387,
+		"nscannedAllPlans" : 385387,
+		"scanAndOrder" : false,
+		"indexOnly" : false,
+		"nYields" : 3010,
+		"nChunkSkips" : 0,
+		"millis" : 606,
+		"server" : "c950.candidate.44:10950",
+		"filterSet" : false
+	}
+
+	{
+    "cursor" : "BtreeCursor username_1_keen.created_at_1",
+    "isMultiKey" : false,
+    "n" : 0,
+    "nscannedObjects" : 0,
+    "nscanned" : 15,
+    "nscannedObjectsAllPlans" : 0,
+    "nscannedAllPlans" : 15,
+    "scanAndOrder" : false,
+    "indexOnly" : false,
+    "nYields" : 0,
+    "nChunkSkips" : 0,
+    "millis" : 0,
+    "indexBounds" : {
+        "username" : [ 
+            [ 
+                "google_user_100109706342463981241", 
+                "google_user_100109706342463981241"
+            ], 
+            [ 
+                "google_user_100231504565317825733", 
+                "google_user_100231504565317825733"
+            ], 
+            [ 
+                "google_user_100977427679225394551", 
+                "google_user_100977427679225394551"
+            ], 
+            [ 
+                "google_user_101849164577787719623", 
+                "google_user_101849164577787719623"
+            ], 
+            [ 
+                "google_user_102460989068715624368", 
+                "google_user_102460989068715624368"
+            ], 
+            [ 
+                "google_user_103005564337565362841", 
+                "google_user_103005564337565362841"
+            ], 
+            [ 
+                "google_user_103721845168342772385", 
+                "google_user_103721845168342772385"
+            ], 
+            [ 
+                "google_user_104769011280112480310", 
+                "google_user_104769011280112480310"
+            ], 
+            [ 
+                "google_user_107482504222784259708", 
+                "google_user_107482504222784259708"
+            ], 
+            [ 
+                "google_user_108339735113368265370", 
+                "google_user_108339735113368265370"
+            ], 
+            [ 
+                "google_user_112226354482569402695", 
+                "google_user_112226354482569402695"
+            ], 
+            [ 
+                "google_user_112277604735324839654", 
+                "google_user_112277604735324839654"
+            ], 
+            [ 
+                "google_user_115015740167916232812", 
+                "google_user_115015740167916232812"
+            ], 
+            [ 
+                "google_user_115345667156179782654", 
+                "google_user_115345667156179782654"
+            ], 
+            [ 
+                "google_user_117272111534225374803", 
+                "google_user_117272111534225374803"
+            ], 
+            [ 
+                "google_user_118245730302407691989", 
+                "google_user_118245730302407691989"
+            ]
+        ],
+        "keen.created_at" : [ 
+            [ 
+                ISODate("2017-01-05T16:33:49.670Z"), 
+                ISODate("2017-05-05T16:33:49.670Z")
+            ]
+        ]
+    },
+    "server" : "c950.candidate.44:10950",
+    "filterSet" : false
+}
