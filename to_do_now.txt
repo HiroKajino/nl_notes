@@ -5,6 +5,7 @@ Q to Erin:
 Q to Duy/Eng. Team
 	Keen.page_views => should we be recording events by non-paying users? Why not record other views?
 		=> lift the limit and see what happens for a few days
+	Are pending user deleted after account creation?	
 
 == Admin Dashboard ==
 Basic methods created for NLKeen in models.py
@@ -85,24 +86,44 @@ Database Performance (Index and cache)
 	=> if necessary, bypass metrics queries when there is a cached data 
 	=> write scripts to pre-compute data & cache it
 
+	=> make the admin_metrics_module error proof by handling cases:
+		: no cache is found or recorded
+		: no record has been persisted
+
 UI:
-	Set min-width on stats-container so that they don't wrap into 3 rows.
-	in district view, show teacher's school in addition to their names.
-	school logo w/ district (or shool) name that doesn't change
-	teacher avatar
+	show % instats
+	show most-something-teacher's info 
+	show most-something-teacher's avatar
+	show district logo 
+
 	make sure font is accurate
-	include % in stats
+
+server still times out with very large data (like Mrs.Bell's district with 'since_account_creation') tag.
+<Start Here>
+	performance improved with caching
+	timothymkenna works fine.
+	macarthytim account gives 500 error, with self.downloaded_lessons don't exists
+	script is written to cache all school districts
+	investigate this.
+	
+	handle when there' is no cache data or None data. make it error proof
+
+=> set up error message for too large data just in case.
+=> handle too-big data
+
+
+downloads/page_views table data updata based on Erin's doc
+
+Downloads filter
+
+=Last adjustment=
+User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
 
 only 'teacher' users are included in the table & stats
 	- 'no_of_active_teachers' should only include school_district_user_type='teacher'
 	- other users should be included so that NL peoplpe can see admin users' usage
 		=> filter should be applied in frontend
-
-User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
-more on performance:
-	refactor get_page_views method: instead of going through the records many times, generate results with one iteration.
-	server still times out with very large data (like Mrs.Bell's district with 'since_account_creation') tag.
-		=> set up error message for too large data just in case.
+document
 
 =Not urgent yet=
 Setting section?
