@@ -1,6 +1,8 @@
 Q to Erin:
-	How to handle active/expired district? How should it affect especially when NL staff sees the dashboard?
+	Employee versions?
+	Final designs?
 	Is last updated necessary?
+
 
 Q to Duy/Eng. Team
 	Keen.page_views => should we be recording events by non-paying users? Why not record other views?
@@ -98,23 +100,15 @@ UI:
 
 	make sure font is accurate
 
-server still times out with very large data (like Mrs.Bell's district with 'since_account_creation') tag.
-<Start Here>
-	performance improved with caching
-	timothymkenna works fine.
-	macarthytim account gives 500 error, with self.downloaded_lessons don't exists
-	script is written to cache all school districts
-	investigate this.
-	
-	handle when there' is no cache data or None data. make it error proof
-
-=> set up error message for too large data just in case.
-=> handle too-big data
-
+set up error message for too large data just in case.
 
 downloads/page_views table data updata based on Erin's doc
 
 Downloads filter
+
+Allow back-forward browser navigation
+
+hightlight selected_section in sidebar
 
 =Last adjustment=
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
@@ -128,8 +122,7 @@ document
 =Not urgent yet=
 Setting section?
 Access denied page
-
-== standard doc fix ==
+handle too-big data(with multiple calls)
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
