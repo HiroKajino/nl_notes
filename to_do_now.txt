@@ -1,7 +1,6 @@
 Q to Erin:
-	Employee versions?
-	Final designs?
-	Is last updated necessary?
+	Column ?'s => Do any of these columns need explanation?
+	Check stats description designs & wording.
 
 
 Q to Duy/Eng. Team
@@ -106,9 +105,40 @@ downloads/page_views table data updata based on Erin's doc
 
 Downloads filter
 
-Allow back-forward browser navigation
 
-hightlight selected_section in sidebar
+UI details:
+	activity table column names
+	three line column names
+	unbold custom date selector & filter checkboxes
+	sidebar order
+	stats line break
+	Apply cap	
+	Active Accounts
+	sidebar narrower
+	ELA format
+	hightlight selected_section in sidebar
+	Start Date adjustment
+	info icon hover to explain
+	school always dropdown & districts click-able
+	alphabetized by school site name in dropdown
+
+<Starts Here>
+Start running downloads data cache script
+
+feature
+	More stats
+		most active site & teacher
+		Downloads section stats
+	Employee privilage
+		for employer acces, show modal to display which districts to see
+		Employee-only columns
+	Access Denied page
+		make it look like 404
+	District Account Info
+		num of sites w/ licenses
+		start / end date
+		contact info of NL
+
 
 =Last adjustment=
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
@@ -117,12 +147,12 @@ only 'teacher' users are included in the table & stats
 	- 'no_of_active_teachers' should only include school_district_user_type='teacher'
 	- other users should be included so that NL peoplpe can see admin users' usage
 		=> filter should be applied in frontend
-document
 
-=Not urgent yet=
-Setting section?
-Access denied page
+Last Updated
+
+=Not urgent yet(Do them if time allows)=
 handle too-big data(with multiple calls)
+Allow back-forward browser navigation
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
