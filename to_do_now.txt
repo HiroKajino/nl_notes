@@ -122,25 +122,52 @@ UI details:
 	school always dropdown & districts click-able
 	alphabetized by school site name in dropdown
 
-<Starts Here>
-Start running downloads data cache script
+More Improvements:
+	remove timestamp -> unnecessary
+	make ? to i on stats box
+	description click 'i' and close and click outside and close
+	clickable things should be pointer, not cursor.
+	district logo maybe not side by side.
+	'clear filter' button 
+	unbold unselected sidebar options
+	percentage based on active accounts, not by total accounts
+	capital 'k' for kindergarten
+	make trinagle to bracket.
+	between reporting and activity, make it bracket.
+	spell out 'PT' in Downloads view
+	make email address copiable
 
 feature
+	Access Denied page
+		make it look like 404
+	Add descriptions to interactive lessons & participation nums
+
+<Start Here>
+	bug: sort triangle appears through description pop up
+	bug: when selecting description on column headers, it sort automatically 
+
+	from 'Essential' to 'STEM-sersion' into on cat 'worksheet' only for admins
 	More stats
 		most active site & teacher
 		Downloads section stats
-	Employee privilage
-		for employer acces, show modal to display which districts to see
-		Employee-only columns
-	Access Denied page
-		make it look like 404
 	District Account Info
 		num of sites w/ licenses
 		start / end date
 		contact info of NL
+	Exclude 'pending' status schools
 
+
+First class clients
+	Fairfield
+	Dublin
+	Maury
+	Buffalo
 
 =Last adjustment=
+click teachers and know what's been downloaded
+adjust description popup positions across the website
+When signing as 'Admin', straight to Admin Dashboard
+Start running downloads data cache script
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
 
 only 'teacher' users are included in the table & stats
@@ -148,9 +175,11 @@ only 'teacher' users are included in the table & stats
 	- other users should be included so that NL peoplpe can see admin users' usage
 		=> filter should be applied in frontend
 
-Last Updated
-
 =Not urgent yet(Do them if time allows)=
+Customizable 'Active' definition
+Employee privilage
+	for employer acces, show modal to display which districts to see
+	Employee-only columns
 handle too-big data(with multiple calls)
 Allow back-forward browser navigation
 
