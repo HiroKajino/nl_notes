@@ -1,7 +1,7 @@
 Q to Erin:
-	Column ?'s => Do any of these columns need explanation?
-	Check stats description designs & wording.
-
+	Oldest data collected is different across the table
+		-> interest id
+	waiting for descriptions for stats and columns
 
 Q to Duy/Eng. Team
 	Keen.page_views => should we be recording events by non-paying users? Why not record other views?
@@ -136,25 +136,36 @@ More Improvements:
 	between reporting and activity, make it bracket.
 	spell out 'PT' in Downloads view
 	make email address copiable
+	setup backend for pageviews
+	from 'Essential' to 'STEM-sersion' into on cat 'worksheet' 
+	Add descriptions to interactive lessons & participation nums
+	Exclude 'pending' status schools
+	only 'teacher' users are included in the table & stats
 
 feature
 	Access Denied page
 		make it look like 404
-	Add descriptions to interactive lessons & participation nums
 
-<Start Here>
-	bug: sort triangle appears through description pop up
-	bug: when selecting description on column headers, it sort automatically 
-
-	from 'Essential' to 'STEM-sersion' into on cat 'worksheet' only for admins
 	More stats
 		most active site & teacher
-		Downloads section stats
+		Refactored stats method	
+
+<Start Here on Monday>
+	Double check keen import comoplete (only search_query needs double-checking. others have been done)
+	Start creating downloads cache data for important disrict.
+
+	School/Teacher based methods have been set up and refactored. Tested locally but not yet on staging. Do this on Monday.
+	Currently workin on most_popular_donwloads object
+		This particular stats need different logic than other school/district.
+		Approach: based on school info, group the school info using group_table method.
+			Get the first element of the grouped table, and find the most downloaded one.
+			On reduce func (if reduce is called, it's district level), ignore the prev value and do the same calculation with table grouped by the district. 
+
+
 	District Account Info
 		num of sites w/ licenses
 		start / end date
 		contact info of NL
-	Exclude 'pending' status schools
 
 
 First class clients
@@ -164,19 +175,21 @@ First class clients
 	Buffalo
 
 =Last adjustment=
-click teachers and know what's been downloaded
+consider creating index for User ('school_district_id', 1), ('school_district_user_type', 1)
+make table horizontal-scrollable
 adjust description popup positions across the website
+	-> check info-icon position on column
+	-> triangle points to the icon
+	-> refactor description component
 When signing as 'Admin', straight to Admin Dashboard
 Start running downloads data cache script
 User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
 
-only 'teacher' users are included in the table & stats
-	- 'no_of_active_teachers' should only include school_district_user_type='teacher'
-	- other users should be included so that NL peoplpe can see admin users' usage
-		=> filter should be applied in frontend
+last login: show only dates, no time
 
 =Not urgent yet(Do them if time allows)=
 Customizable 'Active' definition
+click teachers and know what's been downloaded
 Employee privilage
 	for employer acces, show modal to display which districts to see
 	Employee-only columns
