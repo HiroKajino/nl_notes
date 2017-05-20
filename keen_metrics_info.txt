@@ -1,24 +1,29 @@
-search_queries
-	- record_employee_events: false
-	- no other conditions
 
-page_views/page_views.lesson_details
-	- record_employee_events: false
-	- only when...
-		+ user has district license
-		+ user has OOPS
-		+ user has purchased something (has customer id)
+2017-05-17T20:21:04.618188+00:00 app[web.1]: INFO:1: 553fff50973acc0003d8a970
+0.003
+2017-05-17T20:21:04.621683+00:00 app[web.1]: INFO:2: 553fff50973acc0003d8a970
+0.009
+2017-05-17T20:21:04.630688+00:00 app[web.1]: INFO:3: 553fff50973acc0003d8a970
+0.007
+2017-05-17T20:21:04.637487+00:00 app[web.1]: INFO:4: 553fff50973acc0003d8a970
+0.049
+2017-05-17T20:21:04.686159+00:00 app[web.1]: INFO:5: 553fff50973acc0003d8a970
+0.050
+2017-05-17T20:21:04.736788+00:00 app[web.1]: INFO:6: 553fff50973acc0003d8a970
+0.001
+2017-05-17T20:21:04.737353+00:00 app[web.1]: INFO:7: 553fff50973acc0003d8a970
 
-interestid_rating_toggles
-	- record_employee_events: false
-	- didn't really understand
+2017-05-17T20:21:04.738089+00:00 app[web.1]: INFO:1: 55db434ce19c1f0003c12483
+0.161
+2017-05-17T20:21:04.899573+00:00 app[web.1]: INFO:2: 55db434ce19c1f0003c12483
+0.135
+2017-05-17T20:21:05.052233+00:00 app[web.1]: INFO:3: 55db434ce19c1f0003c12483
+0.027
+2017-05-17T20:21:05.054943+00:00 app[web.1]: INFO:4: 55db434ce19c1f0003c12483
+1.021
+2017-05-17T20:21:06.075558+00:00 app[web.1]: INFO:5: 55db434ce19c1f0003c12483
+0.754
+2017-05-17T20:21:06.829732+00:00 app[web.1]: INFO:6: 55db434ce19c1f0003c12483
+0.002
+2017-05-17T20:21:06.831105+00:00 app[web.1]: INFO:7: 55db434ce19c1f0003c12483
 
-previews
-	- record_employee_events: false
-	- no other conditions
-
-class_sync
-	- currently no data
-
-logins
-	- record_employee_events: true

@@ -1,200 +1,28 @@
 Q to Erin:
-	Oldest data collected is different across the table
-		-> interest id
-	waiting for descriptions for stats and columns
 
 Q to Duy/Eng. Team
-	Keen.page_views => should we be recording events by non-paying users? Why not record other views?
-		=> lift the limit and see what happens for a few days
-	Are pending user deleted after account creation?	
+	Add Sentry error to client code
 
 == Admin Dashboard ==
-Basic methods created for NLKeen in models.py
-Query methods have been tested, and functional
-extraction and import of data has been tested.
-add_event has been tested 
+Uncaught TypeError: Cannot read property 'district_name' of undefined
+	happened in employee view, after switching from Franklin to Middletown Unif
+	-> cannot reproduce the bug. happend a few times but intermittently.
 
-changed page_views and download_counts methods to allow dictionary returns
+<Start Here>
+Improve Employee Access UI & functions
+	intuitive UI
+	Able to see expired Districts
 
-Create aggregate methods to give date to front-end
-
-For testing: user 
-'timothymckenna': active Site Admin with no log in since Aug 2016
-'johnsonmark': active District Admin with no log in since Feb 2017 (one school, 19 teachers)
-google_user_115015740167916232812: 559d7a39e08e70000332410a (16 teachers, 7 districts)
-mccartytim: '5550d964f43b4d0003a8e8f1' (> 300 teachers)
-dbell704: '56a02a89590e750003cb8e42' (> 600 teachers)
-
-Address timeout issue (for big districts, we can't retrieve the data quickly enough for table view)
-
-build table with ko template
-tested table view.
-switching between different sctions doesn't properly work yet.
-sort functions
-make sites selectables
-filter by site
-click school and that school is selected
-loading logo
-grouping logic for 'date' data_type
-
-=Backend=
-Draft Keen migration plan
-	- Deploy NLKeen tracking. => Done...
-		= make changes to keen_ext
-		= There will be no difference for user experience.
-		= Check to see if tracking data is coming in.
-
-=Keen=
-	- Once NLKeen tracking starts, starg migrating Keen data to our DB.
-		= keep querying
-
-	- Then chagne keen_query.py so get the data from NL DB
-		=> test locally -> can't test admin-dashboard locally b/c no user collection locally
-		=> run the script to the productin DB
-			+ page_views are the only necessary one for admin-dashboard
-		=> with some data, start testing on staging
-
-	- import Keen data to NL DB.
-
-=Front End=
-UI:
-	teacher info on hover
-	don't show ugly stuff while loading
-	align dashboard icon with the square.
-
-csv export
-
-=More feature=
-Backend:
-	change from # of submission/answers to # of students w/ students
-	add # of students with interestid
-	change from last_login to last page view.
-
-Date Range:
-	make timeframe able to take objects in addition to string 
-
-UI:
-	data-range selector
-	pretty table header names
-	header info order
-
-	implement Erin's mock:
-
-	All users start from 'dsitrict' layer
-	dropdown date-selector
-
-Database Performance (Index and cache)
-	=> if necessary, bypass metrics queries when there is a cached data 
-	=> write scripts to pre-compute data & cache it
-
-	=> make the admin_metrics_module error proof by handling cases:
-		: no cache is found or recorded
-		: no record has been persisted
-
-UI:
-	show % instats
-	show most-something-teacher's info 
-	show most-something-teacher's avatar
-	show district logo 
-
-	make sure font is accurate
-
-set up error message for too large data just in case.
-
-downloads/page_views table data updata based on Erin's doc
-
-Downloads filter
-
-
-UI details:
-	activity table column names
-	three line column names
-	unbold custom date selector & filter checkboxes
-	sidebar order
-	stats line break
-	Apply cap	
-	Active Accounts
-	sidebar narrower
-	ELA format
-	hightlight selected_section in sidebar
-	Start Date adjustment
-	info icon hover to explain
-	school always dropdown & districts click-able
-	alphabetized by school site name in dropdown
-
-More Improvements:
-	remove timestamp -> unnecessary
-	make ? to i on stats box
-	description click 'i' and close and click outside and close
-	clickable things should be pointer, not cursor.
-	district logo maybe not side by side.
-	'clear filter' button 
-	unbold unselected sidebar options
-	percentage based on active accounts, not by total accounts
-	capital 'k' for kindergarten
-	make trinagle to bracket.
-	between reporting and activity, make it bracket.
-	spell out 'PT' in Downloads view
-	make email address copiable
-	setup backend for pageviews
-	from 'Essential' to 'STEM-sersion' into on cat 'worksheet' 
-	Add descriptions to interactive lessons & participation nums
-	Exclude 'pending' status schools
-	only 'teacher' users are included in the table & stats
-
-feature
-	Access Denied page
-		make it look like 404
-
-	More stats
-		most active site & teacher
-		Refactored stats method	
-
-<Start Here on Monday>
-	Double check keen import comoplete (only search_query needs double-checking. others have been done)
-	Start creating downloads cache data for important disrict.
-
-	School/Teacher based methods have been set up and refactored. Tested locally but not yet on staging. Do this on Monday.
-	Currently workin on most_popular_donwloads object
-		This particular stats need different logic than other school/district.
-		Approach: based on school info, group the school info using group_table method.
-			Get the first element of the grouped table, and find the most downloaded one.
-			On reduce func (if reduce is called, it's district level), ignore the prev value and do the same calculation with table grouped by the district. 
-
-
-	District Account Info
-		num of sites w/ licenses
-		start / end date
-		contact info of NL
-
-
-First class clients
-	Fairfield
-	Dublin
-	Maury
-	Buffalo
-
-=Last adjustment=
-consider creating index for User ('school_district_id', 1), ('school_district_user_type', 1)
-make table horizontal-scrollable
-adjust description popup positions across the website
-	-> check info-icon position on column
-	-> triangle points to the icon
-	-> refactor description component
-When signing as 'Admin', straight to Admin Dashboard
-Start running downloads data cache script
-User.admin_site and User.admin_district determine dashboard access, not school_district_user_type
-
-last login: show only dates, no time
-
-=Not urgent yet(Do them if time allows)=
-Customizable 'Active' definition
-click teachers and know what's been downloaded
-Employee privilage
-	for employer acces, show modal to display which districts to see
+=Future Admin Dashboard=
+	Consolidate duplicate teachers with different email addresses
+	Add Sentry error to client code
+	Fix Pending user number
+	Customizable 'Active' definition
+	click teachers and know what's been downloaded
+	When signing as 'Admin', straight to Admin Dashboard
+	Allow back-forward browser navigation
+	Speedy page load
 	Employee-only columns
-handle too-big data(with multiple calls)
-Allow back-forward browser navigation
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
