@@ -1,7 +1,11 @@
 Q to Erin:
+	# of students who started interacive lessons might be miscalculatd in teacher level.
+	=> what should we do about this?
+	Diffs btw onlin platform participants and active students who signed in through gb joincode
 
 Q to Duy/Eng. Team
 	Add Sentry error to client code
+	Use Redis for search cache
 
 == Admin Dashboard ==
 Uncaught TypeError: Cannot read property 'district_name' of undefined
@@ -9,9 +13,27 @@ Uncaught TypeError: Cannot read property 'district_name' of undefined
 	-> cannot reproduce the bug. happend a few times but intermittently.
 
 <Start Here>
+Monday spent all day including 'active student' column.
+Spent most of that optimizing/organizing cache structure
+New script has run only for Dublin
+Dublin works!
+	=> include page views in the cache so that it hits DB fewer times 
+	=> also includes teacher's user_docs in cache
+	=> then run the script to other districts
+	=> Can we do something about IteractiveAnswers/Submission??
+
+Updata scripts and deploy 
+update documentation
+
+
 Improve Employee Access UI & functions
 	intuitive UI
 	Able to see expired Districts
+	
+	User Redis to cache query data with short life span.
+
+Issues
+	When a loding fails in one school, it fails all -> fix this
 
 =Future Admin Dashboard=
 	Consolidate duplicate teachers with different email addresses
