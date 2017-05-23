@@ -12,38 +12,50 @@ Uncaught TypeError: Cannot read property 'district_name' of undefined
 	happened in employee view, after switching from Franklin to Middletown Unif
 	-> cannot reproduce the bug. happend a few times but intermittently.
 
-<Start Here>
 Monday spent all day including 'active student' column.
 Spent most of that optimizing/organizing cache structure
 New script has run only for Dublin
 Dublin works!
-	=> include page views in the cache so that it hits DB fewer times 
-	=> also includes teacher's user_docs in cache
-	=> then run the script to other districts
+	=> include page views in the cache so that it hits DB fewer times & also includes teacher's user_docs 
+		-> data will be really large! fist see the performance with current cache
 	=> Can we do something about IteractiveAnswers/Submission??
+	=> then run the script to other districts
+
+included users into cache, but the performance did not improve enough.
+following attrs have to be cached by the date, which makes the data so large and messy
+	- keen_page_views, students activities(Answers/submission)
+
+Now trying to implement retry function in front end, in case any request fails => done
 
 Updata scripts and deploy 
-update documentation
 
+<Start Here>
+Run the cache script
+Clean up logs
+Add gameboard participant number?
+deploy!
+
+update documentation
+	- fronend code
 
 Improve Employee Access UI & functions
 	intuitive UI
 	Able to see expired Districts
 	
+	cache first 30 days access at least for shorter initial loading time
 	User Redis to cache query data with short life span.
 
-Issues
-	When a loding fails in one school, it fails all -> fix this
+CSS:
+	on small display, sidebar looks weird.
 
 =Future Admin Dashboard=
 	Consolidate duplicate teachers with different email addresses
-	Add Sentry error to client code
+	Add Sentry error to client code?
 	Fix Pending user number
 	Customizable 'Active' definition
 	click teachers and know what's been downloaded
 	When signing as 'Admin', straight to Admin Dashboard
 	Allow back-forward browser navigation
-	Speedy page load
 	Employee-only columns
 
 == standard-to-skill-migration ==
