@@ -1,17 +1,19 @@
 Q to Erin:
-	# of students who started interacive lessons might be miscalculatd in teacher level.
-	=> what should we do about this?
-	Diffs btw onlin platform participants and active students who signed in through gb joincode
+	students duplicates between teachers?
+		-> accurate on teacher level vs. accurate on site level
+		-> go with accurate teacher-level number is important for our single metrics
+	non-pt online access:
+		include only in employee?
+		combine with interactive pt participants?
+		what about balance w/ submission
+	
+
 
 Q to Duy/Eng. Team
 	Add Sentry error to client code
 	Use Redis for search cache
 
 == Admin Dashboard ==
-Uncaught TypeError: Cannot read property 'district_name' of undefined
-	happened in employee view, after switching from Franklin to Middletown Unif
-	-> cannot reproduce the bug. happend a few times but intermittently.
-
 Monday spent all day including 'active student' column.
 Spent most of that optimizing/organizing cache structure
 New script has run only for Dublin
@@ -28,27 +30,43 @@ following attrs have to be cached by the date, which makes the data so large and
 Now trying to implement retry function in front end, in case any request fails => done
 
 Updata scripts and deploy 
+!!bottle neck is counting functions (student activities and page views)
 
-<Start Here>
+Gameboard Access
+	-> gameboard.last_opened
+
 Run the cache script
 Clean up logs
 Add gameboard participant number?
-deploy!
+
+<Start Here>
+phase 1:
+last_login -> last page view
+	-> this will cause slower data retrieval => cache last_page_view somehow?
+use the unique number of student participants by teacher, not by school site
+	-> change the location of already_recorded_students
+change last_login text (don't include time)
+
+Feeback modal
 
 update documentation
 	- fronend code
 
+phase 2:
+cache first page (30-days)
+User Redis to cache query data with short life span.
+
+Reporting Period: This school year
 Improve Employee Access UI & functions
 	intuitive UI
 	Able to see expired Districts
 	
-	cache first 30 days access at least for shorter initial loading time
-	User Redis to cache query data with short life span.
 
 CSS:
 	on small display, sidebar looks weird.
 
 =Future Admin Dashboard=
+	Show graph of school activities
 	Consolidate duplicate teachers with different email addresses
 	Add Sentry error to client code?
 	Fix Pending user number
@@ -56,7 +74,7 @@ CSS:
 	click teachers and know what's been downloaded
 	When signing as 'Admin', straight to Admin Dashboard
 	Allow back-forward browser navigation
-	Employee-only columns
+	real time activity notification in the page
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
