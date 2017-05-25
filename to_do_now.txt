@@ -39,21 +39,31 @@ Run the cache script
 Clean up logs
 Add gameboard participant number?
 
-<Start Here>
 phase 1:
 last_login -> last page view
 	-> this will cause slower data retrieval => cache last_page_view somehow?
 use the unique number of student participants by teacher, not by school site
 	-> change the location of already_recorded_students
 change last_login text (don't include time)
+run script
+test
+update model
 
+deploy
+
+phase 2:
 Feeback modal
+<Start Here>
+	change email address to feedback@nextlesson.org
+	disable the link for emploees
 
+cache first page (30-days)
+
+Add employee only columns in the page_view
 update documentation
 	- fronend code
 
-phase 2:
-cache first page (30-days)
+phase 3:
 User Redis to cache query data with short life span.
 
 Reporting Period: This school year
