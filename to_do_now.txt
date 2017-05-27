@@ -1,13 +1,6 @@
 Q to Erin:
-	students duplicates between teachers?
-		-> accurate on teacher level vs. accurate on site level
-		-> go with accurate teacher-level number is important for our single metrics
-	non-pt online access:
-		include only in employee?
-		combine with interactive pt participants?
-		what about balance w/ submission
-	
-
+	How about 'most active school' => most page view PER TEACHER 
+	Add employee only columns in the page_view
 
 Q to Duy/Eng. Team
 	Add Sentry error to client code
@@ -45,46 +38,55 @@ last_login -> last page view
 use the unique number of student participants by teacher, not by school site
 	-> change the location of already_recorded_students
 change last_login text (don't include time)
-run script
-test
-update model
-
-deploy
 
 phase 2:
 Feeback modal
-<Start Here>
 	change email address to feedback@nextlesson.org
 	disable the link for emploees
 
-cache first page (30-days)
-
-Add employee only columns in the page_view
-update documentation
-	- fronend code
+run script for all active schools
+Reporting Period: This school year
 
 phase 3:
-User Redis to cache query data with short life span.
+update documentation
+	- fronend code
+	- feedback modal
+Corrections:
+	column description for online lesson participants -> 'participatd' 
+	feedback modal comment center
 
-Reporting Period: This school year
 Improve Employee Access UI & functions
 	intuitive UI
 	Able to see expired Districts
 	
+<Start Here>
+	exclude districts that expired before 2015/9
+Keep track of admin dashboard access as NLKeen
+Change admin page url to avoid confusion with admin-dashboard
 
+phase Maybe:
 CSS:
 	on small display, sidebar looks weird.
+	Annyoing to fix. Ask Ashley
+
 
 =Future Admin Dashboard=
-	Show graph of school activities
-	Consolidate duplicate teachers with different email addresses
-	Add Sentry error to client code?
-	Fix Pending user number
-	Customizable 'Active' definition
-	click teachers and know what's been downloaded
-	When signing as 'Admin', straight to Admin Dashboard
-	Allow back-forward browser navigation
-	real time activity notification in the page
+	On my own:
+		Add Sentry error to client code?
+		Customizable 'Active' definition
+		click teachers and know what's been downloaded
+		When signing as 'Admin', straight to Admin Dashboard
+		Allow back-forward browser navigation
+		real time activity feed in the page
+
+	Need product direction:
+		Show graph of school activities
+		Setting
+			Edit who have access to dashboard
+
+	With E-team
+		Consolidate duplicate teachers with different email addresses
+		Fix Pending user number
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
