@@ -1,6 +1,11 @@
 Q to Erin:
-	How about 'most active school' => most page view PER TEACHER 
 	Add employee only columns in the page_view
+	Should we keep Active Students, it's not accurate
+	Change admin page url to avoid confusion with admin-dashboard
+		=> confrim change address to something like admin-employee?
+		=> already re-direct to my-nextlesson
+	should the 'most active' status be based on number per teacher (instead of raw number?)
+	Prioritize projects/improment to Admin Dashboard
 
 Q to Duy/Eng. Team
 	Add Sentry error to client code
@@ -59,15 +64,17 @@ Improve Employee Access UI & functions
 	intuitive UI
 	Able to see expired Districts
 	
-<Start Here>
 	exclude districts that expired before 2015/9
-Keep track of admin dashboard access as NLKeen
-Change admin page url to avoid confusion with admin-dashboard
+	Keep track of admin dashboard access as NLKeen
 
 phase Maybe:
 CSS:
 	on small display, sidebar looks weird.
 	Annyoing to fix. Ask Ashley
+
+<Start Here>
+Allow back-forward browser navigation
+	Started writing but no gulp or test has been done
 
 
 =Future Admin Dashboard=
@@ -76,7 +83,6 @@ CSS:
 		Customizable 'Active' definition
 		click teachers and know what's been downloaded
 		When signing as 'Admin', straight to Admin Dashboard
-		Allow back-forward browser navigation
 		real time activity feed in the page
 
 	Need product direction:

@@ -1,100 +1,55 @@
-Specs - what I was asked to make
-	Metrics 
-		Keen: 
-			- Page Views 
-		NL DB:
-			- Downloads 
-				download_tracking
-				gameboards
-				interactive_resource_ref
-				worksheets
-			- Student usage
-				interactive_resource_submissions
-				interactive_resource_answers
+Set up users table
+	_id
+	username
+	password
+	email_address
+	google_auth_credential(json)
+	session_token
 
-	Sortable by districts & schools
+Set up limits table
+	_id
+	budget_type FK
+	month
+	year
+	amount
+	result
 
-	Filter-able by timeframe
+Hashing
+	use pycrypto sha256
+	https://www.dlitz.net/software/pycrypto/api/current/
+
+Use Flask for framework
+	static file serving for css
+	Build app with no js
+
+	main page with this months info
+		list of transactions with edit button
+
+	edit page
+		edit content with delte, save, and cancel button
+
+	prev_month view	
+
+Finish seed file
+Launch to EC2
+
+Email reader
+	first get the server running so that auth request can be made from localhost
 	
-	Filter-able by lesson types, grades, subjects (Downloads)
-			
-	Stats
-		Change by selected views
+	install google python sdk 
+	get credential from home mac
+		make sure to set 'access_type' 'offline'
+	Follow this link on OAuth for Web apps
+		https://developers.google.com/api-client-library/python/auth/web-app
+	store credential in db as json
+	probably don't have to use Storage: just use OAuth2Credentials.from_json()
+
+requirements
+	remove 
+		bottle
+	add
+		flask
+		pycrypto
+		google-api-python-client
 
 
-Backend
-	Setting up the module to keep Controller simple (as it should be)
-
-	Need numerous queries to different sources 
-		- Avoid redundancy
-			need to get total page views, my-lessons page views etc in separate Keen queries
-		- Expensive queries
-		- Keen query limit
-
-	Considered caching, but first make it work, then optimize.
-	Custom timeframe cant' be cached, it can be a bit slower but still have to be load-able
-
-	SiteMetricsModule Anatomy	
-		Each module for unique district_id and timeframe
-			generates a list of users
-
-		API to collect table data
-
-		Cache two collection as instance variables
-			- keen_page_view (Keen count query result with group_by=['username', 'page_view'], filer by timeframe)	
-				- use this to calculate total and individual page views
-				- only queries once per instance
-
-			- downloaded_lessons 
-				- use this to calculate total and individual downloads. 
-				- only queries once per instance
-				- Look through download_tracking data, but appends lessons' info such as 
-				  grades, subjects, types so they can be filtered.
-				
-
-	In Practice
-		my original intention:
-			When Admin Dashboard page loads, makes ajax request to get all three table data.
-			The SiteMetricsModule instance is created, and generates the table data.
-			Since it queries NLKeen and expesive DB queries once and cache them as instance vars,
-			loading time will be minimized.
-
-		in practice:
-			loading time was still too slow, and server times out. needed more performance improvement.
-
-		
-	Identifying bottle necks and improve:
-
-		1. Keen
-			-> ended up extarcting all info to NL DB.
-
-		2. NLKeen
-			-> index by username & keen.created_at (played around with .explain command)
-			
-		3. Submissions/Answers
-			-> index by parent_id
-
-		3. Downloads	
-			gets data from multiple collecitons & expensive 
-			-> cache in DB	
-
-
-		Broken up table data API into three separate calls
-			- defeats the purpose of caching a little bit
-
-
-		Kept testing on nl-staging (that's why there are so many commits)	
-		It works for most districts
-		With Buffalo with wide timeframe, server still times out.
-		In prod, performance did not improve.
-
-Keen Migration
-	NLKeen parent class
-	NLKeen.count mimics keen.count mimic 
-
-	NLKeen children classes and their collections
-
-
-Front End
-
-	maybe next time...
