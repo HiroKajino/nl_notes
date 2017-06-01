@@ -1,11 +1,12 @@
 Q to Erin:
-	Add employee only columns in the page_view
 	Should we keep Active Students, it's not accurate
-	Change admin page url to avoid confusion with admin-dashboard
-		=> confrim change address to something like admin-employee?
-		=> already re-direct to my-nextlesson
+		=> Enable students' access to any page view
+		=> hide for now for everyone
+
 	should the 'most active' status be based on number per teacher (instead of raw number?)
+		=> yes, change it so that it's based on percentage
 	Prioritize projects/improment to Admin Dashboard
+	
 
 Q to Duy/Eng. Team
 	Add Sentry error to client code
@@ -72,21 +73,25 @@ CSS:
 	on small display, sidebar looks weird.
 	Annyoing to fix. Ask Ashley
 
-<Start Here>
 Allow back-forward browser navigation
-	Started writing but no gulp or test has been done
+	=> you can't go straight to the link. Any link will be redirected to the default view.
+	=> cannot fix this yet.
 
+<Start Here>
+TEST TEST TEST page navigation on staging. It's already deployed there
+
+Start working on Erin's reqs
 
 =Future Admin Dashboard=
 	On my own:
 		Add Sentry error to client code?
-		Customizable 'Active' definition
-		click teachers and know what's been downloaded
 		When signing as 'Admin', straight to Admin Dashboard
 		real time activity feed in the page
+		use sessionStorage to cache table data locally for faster re-load
+		issue of custom reporting period and dl_filters used at the same time.
+		
 
 	Need product direction:
-		Show graph of school activities
 		Setting
 			Edit who have access to dashboard
 
