@@ -77,10 +77,13 @@ Allow back-forward browser navigation
 	=> you can't go straight to the link. Any link will be redirected to the default view.
 	=> cannot fix this yet.
 
-<Start Here>
-TEST TEST TEST page navigation on staging. It's already deployed there
-
 Start working on Erin's reqs
+	hide active students
+<Start Here>
+	Browser Navigation cannot handle switch bt reporting sections and info sections.
+	direct link to account_info does not work right now
+
+	Settings
 
 =Future Admin Dashboard=
 	On my own:
@@ -89,6 +92,9 @@ Start working on Erin's reqs
 		real time activity feed in the page
 		use sessionStorage to cache table data locally for faster re-load
 		issue of custom reporting period and dl_filters used at the same time.
+			=> Both 'Apply Filter' and 'Apply' buttons take timeframe and dl_filters
+		enable new tab/window navigation
+		When changing section, it shouldn't change table rows order
 		
 
 	Need product direction:
