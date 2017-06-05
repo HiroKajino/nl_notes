@@ -79,9 +79,16 @@ Allow back-forward browser navigation
 
 Start working on Erin's reqs
 	hide active students
-<Start Here>
+
 	Browser Navigation cannot handle switch bt reporting sections and info sections.
 	direct link to account_info does not work right now
+
+
+Navigation should work, Test it many times!
+section -> account_info -> another section ends up doesn't preserve selected/district-Ids
+timeframe is preserved.
+	= investigagte!!
+ 
 
 	Settings
 
@@ -95,6 +102,7 @@ Start working on Erin's reqs
 			=> Both 'Apply Filter' and 'Apply' buttons take timeframe and dl_filters
 		enable new tab/window navigation
 		When changing section, it shouldn't change table rows order
+		cache data by district id => setup cache available flag in front end on metadata loading 
 		
 
 	Need product direction:
