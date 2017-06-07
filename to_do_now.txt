@@ -1,10 +1,4 @@
 Q to Erin:
-	Browser navigation update:
-		direct link access ok for non-employees
-		
-
-	Do you want the district user type change, too? or just the dashboard access?
-	If yes, maybe we should include description like columns?
 
 	There are a bunch of improvements that I can make. Which are the ones that I should be exploring,
 	and which ones would be waste of my time right now?
@@ -89,35 +83,59 @@ Start working on Erin's reqs
 	Settings
 
 <Start Here>
-	start creating definitions of 'active' in a form of objects.
-	elaborate on custom_active_funcs / custom_active_description
+
+	User Settings:
+		Anyone with dashboard access can change info of non-teacher users
+		if you have site access, no option to flag/unflag district access
+		Remove user type in user settings
+
+	Custom Active:
+		include all columns in Activity section
+
+	Settings UI:
+		
+
+	Documentation:
+		On ES6 file
+		
+
 
 =Future Admin Dashboard=
-	On my own:
-		should the 'most active' status be based on number per teacher (instead of raw number?)
-			=> yes, change it so that it's based on percentage
+	Higher priority--
+		Performance improvement
+			localStorage(frontend)
+			cache by district (backend)
+
 		Browser Navigation TODO:
+			set_env_with.. should be the regular case.
+			When navigation to admin-dashboard/ => change url and trigger set_env_with..
+
 			enable direct link access to employee access
 			font end error was caught for employee access on selecting different districts through modal
+
+		Documentation
+
+		Teacher downloads list
+
+		Add email address of the teachers in the downloaded csv table 
+
+		Able to see all teachers within the district (UI is concern, but open up for employess)
+
+
+	Lower priority--
+		issue of custom reporting period and dl_filters used at the same time.
+			=> Both 'Apply Filter' and 'Apply' buttons take timeframe and dl_filters
 
 		Add Sentry error to client code?
 		When signing as 'Admin', straight to Admin Dashboard
 		real time activity feed in the page
-		use sessionStorage to cache table data locally for faster re-load
-		issue of custom reporting period and dl_filters used at the same time.
-			=> Both 'Apply Filter' and 'Apply' buttons take timeframe and dl_filters
 		enable new tab/window navigation
 		When changing section, it shouldn't change table rows order
-		cache data by district id => setup cache available flag in front end on metadata loading 
 		
-
-	Need product direction:
-		Setting
-			Edit who have access to dashboard
-
 	With E-team
 		Consolidate duplicate teachers with different email addresses
 		Fix Pending user number
+
 
 == standard-to-skill-migration ==
 Discussion on Skill Browser button sizes and tag length. -> save this for future when we have a data. 
@@ -243,6 +261,7 @@ When a state standard is tagged with skill,
 
 Issues:
 	- author views items donn't show standard's description on hover if the standards hadn't been a part of the lesson already. (b/c server grabs only descriptions of existing standards)
+
 
 ** Other Tasks **
 
