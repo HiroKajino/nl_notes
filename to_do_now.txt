@@ -1,11 +1,13 @@
 Q to Erin:
-	Should we keep Active Students, it's not accurate
-		=> Enable students' access to any page view
-		=> hide for now for everyone
+	Browser navigation update:
+		direct link access ok for non-employees
+		
 
-	should the 'most active' status be based on number per teacher (instead of raw number?)
-		=> yes, change it so that it's based on percentage
-	Prioritize projects/improment to Admin Dashboard
+	Do you want the district user type change, too? or just the dashboard access?
+	If yes, maybe we should include description like columns?
+
+	There are a bunch of improvements that I can make. Which are the ones that I should be exploring,
+	and which ones would be waste of my time right now?
 	
 
 Q to Duy/Eng. Team
@@ -84,16 +86,20 @@ Start working on Erin's reqs
 	direct link to account_info does not work right now
 
 
-Navigation should work, Test it many times!
-section -> account_info -> another section ends up doesn't preserve selected/district-Ids
-timeframe is preserved.
-	= investigagte!!
- 
-
 	Settings
+
+<Start Here>
+	start creating definitions of 'active' in a form of objects.
+	elaborate on custom_active_funcs / custom_active_description
 
 =Future Admin Dashboard=
 	On my own:
+		should the 'most active' status be based on number per teacher (instead of raw number?)
+			=> yes, change it so that it's based on percentage
+		Browser Navigation TODO:
+			enable direct link access to employee access
+			font end error was caught for employee access on selecting different districts through modal
+
 		Add Sentry error to client code?
 		When signing as 'Admin', straight to Admin Dashboard
 		real time activity feed in the page
