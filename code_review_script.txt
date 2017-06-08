@@ -1,55 +1,24 @@
-Set up users table
-	_id
-	username
-	password
-	email_address
-	google_auth_credential(json)
-	session_token
+loading process
 
-Set up limits table
-	_id
-	budget_type FK
-	month
-	year
-	amount
-	result
+get_metadata
+	for non-employees
 
-Hashing
-	use pycrypto sha256
-	https://www.dlitz.net/software/pycrypto/api/current/
+		initial loading
+		pop state           -> set_env_with_path -> 
 
-Use Flask for framework
-	static file serving for css
-	Build app with no js
+	for employees
+		select
 
-	main page with this months info
-		list of transactions with edit button
 
-	edit page
-		edit content with delte, save, and cancel button
+On view change
+	when section changes
 
-	prev_month view	
 
-Finish seed file
-Launch to EC2
+	when selected district/school change (layer)
 
-Email reader
-	first get the server running so that auth request can be made from localhost
+
+	when different timeframe or downloads filter is applied
 	
-	install google python sdk 
-	get credential from home mac
-		make sure to set 'access_type' 'offline'
-	Follow this link on OAuth for Web apps
-		https://developers.google.com/api-client-library/python/auth/web-app
-	store credential in db as json
-	probably don't have to use Storage: just use OAuth2Credentials.from_json()
-
-requirements
-	remove 
-		bottle
-	add
-		flask
-		pycrypto
-		google-api-python-client
 
 
+description logic

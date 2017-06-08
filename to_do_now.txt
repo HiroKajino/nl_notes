@@ -1,9 +1,5 @@
 Q to Erin:
 
-	There are a bunch of improvements that I can make. Which are the ones that I should be exploring,
-	and which ones would be waste of my time right now?
-	
-
 Q to Duy/Eng. Team
 	Add Sentry error to client code
 	Use Redis for search cache
@@ -83,7 +79,9 @@ Start working on Erin's reqs
 	Settings
 
 <Start Here>
-
+	Refactor:
+		MARK1: we don't need to have a initial loading type anymore.
+	
 	User Settings:
 		Anyone with dashboard access can change info of non-teacher users
 		if you have site access, no option to flag/unflag district access
@@ -95,13 +93,14 @@ Start working on Erin's reqs
 	Settings UI:
 		
 
-	Documentation:
-		On ES6 file
-		
-
-
 =Future Admin Dashboard=
 	Higher priority--
+		Refactor:
+			MARK2: Consider consolidating this with set_initial_district_and_school_ids
+			Consider changing grade filters checkbox values to observables
+			Consider description pop ups into a component or templates
+
+
 		Performance improvement
 			localStorage(frontend)
 			cache by district (backend)
