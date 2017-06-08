@@ -78,28 +78,40 @@ Start working on Erin's reqs
 
 	Settings
 
-<Start Here>
 	Refactor:
-		MARK1: we don't need to have a initial loading type anymore.
+		remove laoding_data_type
+		remove get_current_query_strings helper method
 	
+<Start Here>
 	User Settings:
 		Anyone with dashboard access can change info of non-teacher users
 		if you have site access, no option to flag/unflag district access
 		Remove user type in user settings
+		Add a paragraph to explain what user settings do
 
 	Custom Active:
 		include all columns in Activity section
 
 	Settings UI:
+		Make tables align
+		'Update' button to the right
+		make 'Account Info' and 'Settings' don't stack
+
+	Documentation
+		Add code_review_script documentation to the js file
+
+	TEST TEST TEST!!
+
+	Deploy
 		
 
 =Future Admin Dashboard=
 	Higher priority--
+		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
 		Refactor:
 			MARK2: Consider consolidating this with set_initial_district_and_school_ids
 			Consider changing grade filters checkbox values to observables
 			Consider description pop ups into a component or templates
-
 
 		Performance improvement
 			localStorage(frontend)
@@ -112,9 +124,8 @@ Start working on Erin's reqs
 			enable direct link access to employee access
 			font end error was caught for employee access on selecting different districts through modal
 
-		Documentation
 
-		Teacher downloads list
+		Teacher downloads list appear by clicking the teacher.
 
 		Add email address of the teachers in the downloaded csv table 
 

@@ -1,24 +1,83 @@
+Table Data
+	Three table_data observableArrays( activity, downloads, page_views )
+	Already filtered and calculated by the timeframe
+	Each element of array represent teacher's info with metadata.
+	Data can be filtered and grouped by district and school of user's choice
+
+		"last_page_view":       {"value":"05/18/2016","data_type":"date"},
+		"total_page_views":     {"value":0,"data_type":"int"},
+		"student_submissions":  {"value":0,"data_type":"int"},
+		"student_answers":      {"value":0,"data_type":"int"},
+		"interactive_downloads":{"value":0,"data_type":"int"},
+		"teacher_name":         {"value":"Millissa Hock","data_type":"row_header"}
+		etc...
+
+		"metadata":
+			{"email":"mahock@buffaloschools.org",
+			"school_district_id":"572910b0a392900003e37b71",
+			"avatar_url":null,
+			"district_id":"56a02a89590e750003cb8e42",
+			"username":"hock",
+			"school_district_user_type":"Teacher"}
+
+When timeframe or downloads filters change, make another ajax call to the server. 
+	Tracks previously queried timeframe and downloads filters
+
+	filter checkboxes are not observables. current_downloads_filter traverses currently
+	selected checkboxes and capture what's selected.
+
+Get Metadata
+	Very first thing that happens when the page loads.
+	Public users:
+		Server returns with the info of district(should be only one) and schools that the user
+		is allowed to see. 
+
+	Employees:
+		If it's an employee user(and if the url is plain), server returns with list of selectable districts. 
+		User chooses districts in the modal, which triggers table data retrieval
+
 loading process
+	Two functions that take care of table data retrieval.
 
-get_metadata
-	for non-employees
+	1. get_all_table_data_and_update_observables(timeframe, downloads_filters)
+		make ajax call to retrieve table data for every school_district ids that the user
+		is authorized to see. On every call, it retrieves the all three types of table data for 
+		the school district.
 
-		initial loading
-		pop state           -> set_env_with_path -> 
+		called from many functions
+			On initial load (set_env_with_path)
+			On popstate event (setn_env_with_paht)
+			When timeframe value changes, and if it's different from previous query, and it's not custom(get_table_data_with_selected_timeframe)
+			When 'Apply' button is hit on custome timeframe(get_table_data_with_selected_timeframe)
 
-	for employees
-		select
+	2. update_downloads_table_data_with_filter()
+		similar to get_all_table_data....(), but retrieves only Donwloads table data.
+			On popstate event (when in Downloads section, and filters have changed from previous query.)
+			when 'Apply Filters' button is clicked with a new set of downloads filters
+			when 'Clear Filters' button is clicked and the updated queries ard different from prior ones
+			When Downloads section is selected 
 
+Retry Queue
+	When the client receive error, the ajax call's info is put into the retry queue. It keeps trying the
+	ajax call until it fails 3 times, or loading finishes. 
 
-On view change
-	when section changes
+There are two processes involved in enabling browser navigation
+	update_history()
+		Updates the browser history to enable back/foward navigation
+		it is called ...
+			when section changes
+			when selected district/school change (layer)
+			when different timeframe or downloads filter is applied(new table data query is fired)
 
-
-	when selected district/school change (layer)
-
-
-	when different timeframe or downloads filter is applied
-	
+	set_env_with_path()
+		set the client environments from the path
+		it sets	
+			section,
+			district/school_ids
+			timefarme, downlaods filters
+		While this function runs, update_history() won't kick in
+		Depending on what observables have changed, it might or might not trigger reloading of table data.
 
 
 description logic
+
