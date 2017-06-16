@@ -1,93 +1,15 @@
 Q to Erin:
 
 Q to Duy/Eng. Team
-	Add Sentry error to client code
-	Use Redis for search cache
 
 == Admin Dashboard ==
-Monday spent all day including 'active student' column.
-Spent most of that optimizing/organizing cache structure
-New script has run only for Dublin
-Dublin works!
-	=> include page views in the cache so that it hits DB fewer times & also includes teacher's user_docs 
-		-> data will be really large! fist see the performance with current cache
-	=> Can we do something about IteractiveAnswers/Submission??
-	=> then run the script to other districts
-
-included users into cache, but the performance did not improve enough.
-following attrs have to be cached by the date, which makes the data so large and messy
-	- keen_page_views, students activities(Answers/submission)
-
-Now trying to implement retry function in front end, in case any request fails => done
-
-Updata scripts and deploy 
-!!bottle neck is counting functions (student activities and page views)
-
-Gameboard Access
-	-> gameboard.last_opened
-
-Run the cache script
-Clean up logs
-Add gameboard participant number?
-
-phase 1:
-last_login -> last page view
-	-> this will cause slower data retrieval => cache last_page_view somehow?
-use the unique number of student participants by teacher, not by school site
-	-> change the location of already_recorded_students
-change last_login text (don't include time)
-
-phase 2:
-Feeback modal
-	change email address to feedback@nextlesson.org
-	disable the link for emploees
-
-run script for all active schools
-Reporting Period: This school year
-
-phase 3:
-update documentation
-	- fronend code
-	- feedback modal
-Corrections:
-	column description for online lesson participants -> 'participatd' 
-	feedback modal comment center
-
-Improve Employee Access UI & functions
-	intuitive UI
-	Able to see expired Districts
 	
-	exclude districts that expired before 2015/9
-	Keep track of admin dashboard access as NLKeen
-
-phase Maybe:
-CSS:
-	on small display, sidebar looks weird.
-	Annyoing to fix. Ask Ashley
-
-Allow back-forward browser navigation
-	=> you can't go straight to the link. Any link will be redirected to the default view.
-	=> cannot fix this yet.
-
-Start working on Erin's reqs
-	hide active students
-
-	Browser Navigation cannot handle switch bt reporting sections and info sections.
-	direct link to account_info does not work right now
-
-
-	Settings
-
-	Refactor:
-		remove laoding_data_type
-		remove get_current_query_strings helper method
-	
-<Start Here>
 	User Settings:
 		Anyone with dashboard access can change info of non-teacher users
 		if you have site access, no option to flag/unflag district access
 		Remove user type in user settings
 		Add a paragraph to explain what user settings do
+		Sort users by districts
 
 	Custom Active:
 		include all columns in Activity section
@@ -100,36 +22,28 @@ Start working on Erin's reqs
 	Documentation
 		Add code_review_script documentation to the js file
 
-	TEST TEST TEST!!
-
-	Deploy
-		
-
 =Future Admin Dashboard=
+	Able to see all teachers within the district (UI is concern, but open up for employess)
+
+<Start Here>
+	Add email address of the teachers in the downloaded csv table
+	^^ this is done. add some documentation
+
 	Higher priority--
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
+
 		Refactor:
 			MARK2: Consider consolidating this with set_initial_district_and_school_ids
-			Consider changing grade filters checkbox values to observables
 			Consider description pop ups into a component or templates
 
 		Performance improvement
 			localStorage(frontend)
 			cache by district (backend)
 
-		Browser Navigation TODO:
-			set_env_with.. should be the regular case.
-			When navigation to admin-dashboard/ => change url and trigger set_env_with..
-
-			enable direct link access to employee access
-			font end error was caught for employee access on selecting different districts through modal
-
-
 		Teacher downloads list appear by clicking the teacher.
 
-		Add email address of the teachers in the downloaded csv table 
 
-		Able to see all teachers within the district (UI is concern, but open up for employess)
+		Account Info for Employees
 
 
 	Lower priority--
