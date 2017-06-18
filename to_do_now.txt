@@ -24,10 +24,33 @@ Q to Duy/Eng. Team
 
 =Future Admin Dashboard=
 	Able to see all teachers within the district (UI is concern, but open up for employess)
+	Account Info for Employees
+	Add email address of the teachers in the downloaded csv table
+
 
 <Start Here>
-	Add email address of the teachers in the downloaded csv table
-	^^ this is done. add some documentation
+	Teacher downloads list
+		teacher info (give the entire row data )
+
+		downloaded lessons
+			columns:
+				master title:
+				edition name: <- Add this
+				lesson type:
+				interactive: 
+				download date: <- Add this
+				subjects:
+				grades:
+
+			create a method in SiteMetricsModule to gather downloaded lesson data 
+				using SiteMetricsModule.query_db_for_downloaded_lessons()
+
+			include downloaded date in metrics_utils.py
+			
+			setup route
+
+			setup frontend js modal
+
 
 	Higher priority--
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
@@ -42,8 +65,6 @@ Q to Duy/Eng. Team
 
 		Teacher downloads list appear by clicking the teacher.
 
-
-		Account Info for Employees
 
 
 	Lower priority--
