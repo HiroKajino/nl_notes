@@ -30,29 +30,55 @@ Q to Duy/Eng. Team
 
 <Start Here>
 	Teacher downloads list
-		teacher info (give the entire row data )
+		teacher info (give the entire row data)
 
-		downloaded lessons
+
+		setup route
+			/get-user-download-history
+			Create new SiteMetricsModule for the queried user's site
+			call get_downloaded_lessons_by_username on the user's name
+			serialize the results and return
+
+			also get utils.get_user_metadata
+
+			for this process, create a classmethod in SiteMetricsModule to gather downloaded lesson data 
+				using SiteMetricsModule.get_downloaded_lessons_by_username()
+
+		setup frontend js modal
+			setup $root.selected_teacher_for_download_history_modal()
+			modal has access to the above observable through params
+
+			Flow:
+				when teacher's name is clicked
+					update $root.selected_teacher_for_download_history_modal() observable
+					modal opens
+					
+				Modal 
+					This school year's data is automatically selected
+					ajax call to /get-user-download-history
+		
+				When modal closes, selected_teacher_for_download_history_modal resets
+
+		template	
+			Able to change timeframe (only school years)
+			Teacher's Info:
+				School
+				username
+				email
+				
 			columns:
 				master title:
-				edition name: <- Add this
 				lesson type:
 				interactive: 
-				download date: <- Add this
 				subjects:
 				grades:
+				date: 
 
-			create a method in SiteMetricsModule to gather downloaded lesson data 
-				using SiteMetricsModule.query_db_for_downloaded_lessons()
-
-			include downloaded date in metrics_utils.py
-			
-			setup route
-
-			setup frontend js modal
-
+				Only for interactive pt
+				edition name: <- Add this
 
 	Higher priority--
+		Find where the NL header is. Some pages don't have the link to admin-dashboard.
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
 
 		Refactor:
