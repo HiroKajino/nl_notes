@@ -1,6 +1,8 @@
 Q to Erin:
 
 Q to Duy/Eng. Team
+	When new copy of lesson is made, is it recorded in download_tracking?
+	Why are there duplicates? (check user google_user_114109444987630726255 download_tracking)
 
 == Admin Dashboard ==
 	
@@ -28,57 +30,14 @@ Q to Duy/Eng. Team
 	Add email address of the teachers in the downloaded csv table
 
 
-<Start Here>
 	Teacher downloads list
-		teacher info (give the entire row data)
-
-
-		setup route
-			/get-user-download-history
-			Create new SiteMetricsModule for the queried user's site
-			call get_downloaded_lessons_by_username on the user's name
-			serialize the results and return
-
-			also get utils.get_user_metadata
-
-			for this process, create a classmethod in SiteMetricsModule to gather downloaded lesson data 
-				using SiteMetricsModule.get_downloaded_lessons_by_username()
-
-		setup frontend js modal
-			setup $root.selected_teacher_for_download_history_modal()
-			modal has access to the above observable through params
-
-			Flow:
-				when teacher's name is clicked
-					update $root.selected_teacher_for_download_history_modal() observable
-					modal opens
-					
-				Modal 
-					This school year's data is automatically selected
-					ajax call to /get-user-download-history
-		
-				When modal closes, selected_teacher_for_download_history_modal resets
-
-		template	
-			Able to change timeframe (only school years)
-			Teacher's Info:
-				School
-				username
-				email
-				
-			columns:
-				master title:
-				lesson type:
-				interactive: 
-				subjects:
-				grades:
-				date: 
-
-				Only for interactive pt
-				edition name: <- Add this
+		loading logo
+<Start Here>
+		sortable by column(transplant from admin-dashboard)
 
 	Higher priority--
 		Find where the NL header is. Some pages don't have the link to admin-dashboard.
+
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
 
 		Refactor:
@@ -88,9 +47,6 @@ Q to Duy/Eng. Team
 		Performance improvement
 			localStorage(frontend)
 			cache by district (backend)
-
-		Teacher downloads list appear by clicking the teacher.
-
 
 
 	Lower priority--
