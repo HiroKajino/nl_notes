@@ -1,8 +1,7 @@
 Q to Erin:
 
 Q to Duy/Eng. Team
-	When new copy of lesson is made, is it recorded in download_tracking?
-	Why are there duplicates? (check user google_user_114109444987630726255 download_tracking)
+	'Make Another Copy' will create a new record in dl tracking, but creating new copy from platform doesn't
 
 == Admin Dashboard ==
 	
@@ -32,11 +31,26 @@ Q to Duy/Eng. Team
 
 	Teacher downloads list
 		loading logo
-<Start Here>
 		sortable by column(transplant from admin-dashboard)
+		link to the lesson on click
+
+	Find where the NL header is. Some pages don't have the link to admin-dashboard.
+
+		Add participants info
+			interactive pt
+			gameboard 
+
+<Start Here>
+	push to nl-staging-hiro
+	test & check for function
+	improve UI
+	Comment & Document
+		esp. 'lesson_id' in metrics utils.get_interactive_info
+	Send msg to Erin
+
+	-- end here for this vacation
 
 	Higher priority--
-		Find where the NL header is. Some pages don't have the link to admin-dashboard.
 
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
 
