@@ -36,21 +36,29 @@ Q to Duy/Eng. Team
 
 	Find where the NL header is. Some pages don't have the link to admin-dashboard.
 
-		Add participants info
-			interactive pt
-			gameboard 
+	Add participants info
+		interactive pt
+		gameboard 
 
-<Start Here>
-	push to nl-staging-hiro
-	test & check for function
-	improve UI
-	Comment & Document
-		esp. 'lesson_id' in metrics utils.get_interactive_info
-	Send msg to Erin
+* Edits you suggested yesterday have been made.
 
-	-- end here for this vacation
+* In district view, employees can toggle between 'Display by Teacher' and 'Display by District/School' so that we can see all teachers across school site within the district. 
+* Employees can view 'Account Info' for which the data is being displayed.
+
+* School nam and email address is included in the CSV download file.
+* Full download history can be viewed by clicking teacher's name. This feature needs most editing. Here some notes.
+	- download history is retrieved by the school year
+	- Some teachers have duplicate lessons. This is because they might have clicked 'Make Another Copy' button in the project details page and downloaded multiple copies. 
+	- By clicking the +/- button on each row, additional information about the lesson can be displayed. 'participants' (students who used online platform for the lesson at least onece) only show for interactive pts and online project platform. 'Submissions' only show for interactive pts. The numbers are not guaranteed to be always accurate. I can explain more about this when I get back.
+
 
 	Higher priority--
+<Start Here>
+		When opening dl-history-modal for the same user, don't reset variables.
+
+		Investigate inconsistency of 'participants' data.
+			admin-dashboard/activity/5550d964f43b4d0003a8e8f1/553ffd1a2d3ac00003cd41ed?timeframe=school_year_2016_17
+			check out teacher J. Rosin. The number of students participants don't add up. Where does number 21 come from while she doesn't have any project?
 
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
 
