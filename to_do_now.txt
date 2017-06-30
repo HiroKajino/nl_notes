@@ -1,23 +1,81 @@
 Admin Dashboard Q's
+	What happens when paper pt had been downloaded, and the user now access the old lesson?
+		-> how does it affect download tracking, if at all?
+
 	What page views to track?
+		lesson_details is separate function
+		only for paid users (lisencee, OOPS, and stripe customer_id). This excludes students.
+			[
+				"my-nextlesson",
+				"my-lessons",
+				"dashboard",
+				"interactive-view",
+				"cart",
+				"search",
+				"lesson-details",
+				"class-manager",
+				"interactive-answer-submission",
+				"standards-browser",
+				"my-account",
+				"interestid-report",
+				"lesson-types",
+				"pricing",
+				"about-us",
+				"interactive-dl-view",
+				"interestid-browser",
+				"jobs",
+				"press",
+				"faq",
+				"home",
+				"admin-dashboard"
+			]
+
 	What info do we record of the downloaded lessons:
-		When new lessons come live
-			- interactive worksheet
-			- interactive projects
+		- The following User instance methods are called in views.py to track downlaods
+			track_gameboard_download
+				@bottle.post('/checkout')
+				@route('/downloadgameboard/<gid>/<groupid>')
+				@bottle.post('/checkout-free')
 
-		currently in interactive lessons
-			ref_id (already tracked)
-			edition_version_id (already tracked as 'edition_version_id')
-			user_copy_id(not tracked now)
+			track_worksheet_download
+				@bottle.post('/checkout')
+				@route('/track_download/<download_type>/<download_id>', method=['GET', 'POST'])
+	
+			track_interactive_download
+				@bottle.post('/checkout')
+				@route('/track_download/<download_type>/<download_id>', method=['GET', 'POST'])
 
-	When does download tracking kick in? What is the definition of 'download'?
-		when clicking 'Make Another Copy' -> this happens already
-		what about when creating a clone?
+			download_tracking_table.update() is also used in
+				def createAccount
+				@bottle.post('/checkout-free') for 'wids'
 
-	What changes are made to all the lessons?
-	How should we change admin dashboard stats depending on the changes?
+
+		- download_tracking document
+			downloads: all types of downloads are recorded here.
+				gid => master gid for gameboards
+				ref_id & edition_id => ref_id and edition_version_id for interactive lessons
+				wid => wid for worksheet
+				
+			interactive and worksheet also gets their own nested dictionary, but I don't know why. 
+			Should we start tracking the lessons that is created by the download(user copy)?
+			
+		- Should we get rid of redundancy (remove duplicates download records)?
+			We should not record the download when 'Make Another Copy' is pressed(when the same lesson is dl'ed)
+			It's creating inconsistency b/c when a lesson clone is made, it's not recorded as donwload.
+
+		- When new lessons come live
+			interactive worksheet
+			interactive projects
+
+
+	What changes are made to all the lessons that affects Admin Dashboard and download tracking?
 
 Admin Dashboard Note
+	To show warning that the table data is outside of licence duration, the license date has to be correct.
+		For example, Dublin 
+
+	Only first 30 teachers show up for the performace reason.
+
 	Some teachers keep using lessons downloaded 2+ years ago, and new students have been accessing 'last_opened'
 	-> This causes # of participants high, but the lessons that students are using migt not show up in the dl history modal
 
@@ -29,6 +87,7 @@ Admin Dashboard Note
 			'has_interactive_version' flag is true
 		one such user is pottsj1 in Maury
 
+	No issues were found in Edge browser
 
 Q to Erin:
 	Many users seem to be using the same lessons over and over. These lessons are downloaded long time ago 2015-, and
@@ -36,6 +95,10 @@ Q to Erin:
 	are being used as opposed to what lessons are downloaded? Many lessons are downloaded but doesn't mean that they are
 	used.
 		kmaxwell of Maury - Cox: keeps using & creating copies from lessons dowloadd in 2015.
+		J. Rosin of Dublin
+
+	timeframe warning is on staging
+
 
 Q to Duy/Eng. Team
 	'Make Another Copy' will create a new record in dl tracking, but creating new copy from platform doesn't
@@ -81,10 +144,6 @@ Q to Duy/Eng. Team
 	Higher priority--
 		When opening dl-history-modal for the same user, don't reset variables.
 
-		Investigate inconsistency of 'participants' data.
-			admin-dashboard/activity/5550d964f43b4d0003a8e8f1/553ffd1a2d3ac00003cd41ed?timeframe=school_year_2016_17
-			check out teacher J. Rosin. The number of students participants don't add up. Where does number 21 come from while she doesn't have any project?
-
 		UI:
 			yes/no on 'interactive'
 			show dl type like downloads table
@@ -92,25 +151,27 @@ Q to Duy/Eng. Team
 			take off line on expanded table row in dl-history
 
 		auto save settings
-
-<Start Here>
 		More edits to Admin Dashboard:
-			loading observable while toggling between teacher/school view (curr only employees) 
-				-> takes a long time, especially when changing between section
-				-> have loading status be false when changing section & teacher/school toggle
 			Close button white in modal in white
-			Edits to DL history modal
-				include additional info dict in the reset function.
-				Try solving the issue of duplicates
-
-			When the specified timeframe is outside of district license, show message (for expired districts)
 
 		Pending Users:
 			when pending users has the admin access flag, preserve it when it becomes a active account
+		More edits:
+			Loading logo while switching sections:
+				checkout admin-dashboard branch --> even when 'finished_loading_table_data()' is false, 
+				spinner doesn't kick in.
+
+		When the specified timeframe is outside of district license, show message (for expired districts)
 
 		Check on Edge browser
 
+<Start Here>
+		on Download History modal, the number of participants might be wrong if gameboard is looked up by their gid.
+			(it's parent's gid, not the user's unique gameboard id) => def get_student_participation_info():
+		Try solving the issue of duplicates
+
 	Lower priority--
+		Admin Dashboard Emailer
 
 		Add Sentry error to client code?
 		When signing as 'Admin', straight to Admin Dashboard
