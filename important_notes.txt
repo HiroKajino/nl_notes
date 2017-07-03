@@ -1,3 +1,32 @@
+*****   Download Tracking    *****
+- The following User instance methods are called in views.py to track downlaods
+	track_gameboard_download
+		@bottle.post('/checkout')
+		@route('/downloadgameboard/<gid>/<groupid>')
+		@bottle.post('/checkout-free')
+
+	track_worksheet_download
+		@bottle.post('/checkout')
+		@route('/track_download/<download_type>/<download_id>', method=['GET', 'POST'])
+
+	track_interactive_download
+		@bottle.post('/checkout')
+		@route('/track_download/<download_type>/<download_id>', method=['GET', 'POST'])
+
+	download_tracking_table.update() is also used in
+		def createAccount
+		@bottle.post('/checkout-free') for 'wids'
+
+
+- download_tracking document
+	downloads: all types of downloads are recorded here.
+		gid => master gid for gameboards
+		ref_id & edition_id => ref_id and edition_version_id for interactive lessons
+		wid => wid for worksheet
+
+	interactive and worksheet also gets their own nested dictionary, but I don't know why. 
+	Should we start tracking the lessons that is created by the download(user copy)?
+
 *****   pdf generation *****
 When a new publish happens, a task is sent to the redis work queue.
 worker.py execute a shell command to generate pdf using phantom.js.
