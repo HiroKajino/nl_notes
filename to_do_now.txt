@@ -3,7 +3,22 @@
 		Only first 30 teachers show up for mainly the performace reason, also for tidiness
 		No issues were found in Edge browser
 		bug in activity/project numbers on dl-history-modal is fixed
+		if the user is using old pt, it says so.
+			check this user
+				u'Maury County Schools'
+				Maury County Schools
+				woneal Wendy O'Neal
+				She has a Minecraft download originally as paper but interactive
+
+
+		When changing section, it shouldn't change table rows order
 		Timeframe warning is on staging
+		OOPS Email
+
+		Fixes:
+		'User has not used interactive version'
+		make '2016-2017 year default
+		Edge, check fn of 'custom date'
 
 	Questions & Concerns:
 		To show warning that the table data is outside of licence duration, the license date has to be correct.
@@ -141,28 +156,36 @@ Q to Duy/Eng. Team
 
 		Check on Edge browser
 
+		Admin Dashboard Emailer
+			user has a flag 'recieves_admin_dashboard_email_alert': T/F
+			flag 'frequency': every_week, every_month, every_2_month, every_3_month
+			'last_received'
+			'See last months activity in your district'
+				as default, link to show last month activity
+
+	Activity Modal instead of Download history
+		model method get_used_or_downloaded_lessons created
 <Start Here>
-	Making changes to lesson details route for dl history modal
-		so that it works for old paper pt upgraded to interactive pt
-		Ln224 'worksheet' is unnecessary?
-		Test on staging server
-		check this user
-			u'Maury County Schools'
-			Maury County Schools
-			woneal Wendy O'Neal
-			She has a Minecraft download originally as paper but interactive
+		fixing download-history route
+			start by checking the what the server returns with that route
+			debugger doesn't kick in, don't know why
+			dl dates are wrong
 
+		Need to fix front end?
+		fix lesson-details route
 
-	Test Email sender
+	Fix what Erin suggested
+
+	migrate metrics_utils logic to model
+	change admin_metrics_module accordingly
+
+	Set up Email Sender 
 
 	Lower priority--
-		Admin Dashboard Emailer
 
 		Add Sentry error to client code?
 		When signing as 'Admin', straight to Admin Dashboard
 		real time activity feed in the page
-		enable new tab/window navigation
-		When changing section, it shouldn't change table rows order
 
 		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
 
