@@ -1,24 +1,12 @@
 == meeting with Erin
 	What's done:
-		Only first 30 teachers show up for mainly the performace reason, also for tidiness
-		No issues were found in Edge browser
-		bug in activity/project numbers on dl-history-modal is fixed
-		if the user is using old pt, it says so.
-			check this user
-				u'Maury County Schools'
-				Maury County Schools
-				woneal Wendy O'Neal
-				She has a Minecraft download originally as paper but interactive
-
-
-		When changing section, it shouldn't change table rows order
-		Timeframe warning is on staging
-		OOPS Email
+		Show user activity
+			-> number of participants & submissions are not filtered by the date
+		Original Column
+		checkmark instead of yes/no
 
 		Fixes:
-		'User has not used interactive version'
-		make '2016-2017 year default
-		Edge, check fn of 'custom date'
+			Edge, check fn of 'custom date'
 
 	Questions & Concerns:
 		To show warning that the table data is outside of licence duration, the license date has to be correct.
@@ -167,19 +155,17 @@ Q to Duy/Eng. Team
 		model method get_used_or_downloaded_lessons created
 <Start Here>
 		fixing download-history route
-			start by checking the what the server returns with that route
-			debugger doesn't kick in, don't know why
-			dl dates are wrong
+		original lesson column
+			Jorge Albarran ==> original flags to be true
+			google_user_116832471028620047361 | Fairfield-Suisun USD Public Safety Academy 
 
-		Need to fix front end?
-		fix lesson-details route
+			Katherine McKenna ==> original flags to be false (2015-16 year)
+			google_user_112215999174643378653 | Green Valley Middle School | katherinem@fsusd.org
 
-	Fix what Erin suggested
-
-	migrate metrics_utils logic to model
-	change admin_metrics_module accordingly
-
+	Check Edge function on 'custom date'
 	Set up Email Sender 
+	Add sentry error in script
+
 
 	Lower priority--
 
