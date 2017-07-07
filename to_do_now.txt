@@ -4,6 +4,7 @@
 			-> number of participants & submissions are not filtered by the date
 		Original Column
 		checkmark instead of yes/no
+		Emailer is ready (wait til new school year?)
 
 		Fixes:
 			Edge, check fn of 'custom date'
@@ -153,7 +154,6 @@ Q to Duy/Eng. Team
 
 	Activity Modal instead of Download history
 		model method get_used_or_downloaded_lessons created
-<Start Here>
 		fixing download-history route
 		original lesson column
 			Jorge Albarran ==> original flags to be true
@@ -164,6 +164,21 @@ Q to Duy/Eng. Team
 
 	Check Edge function on 'custom date'
 	Set up Email Sender 
+
+	Test Email
+	don't set on scheduler email yet -> wa
+
+<Start Here>
+	Add admin_dashbaord related User doc flags to documentation
+		admin_site
+		admin_district
+		receive_admin_dashboard_email_reminder
+		admin_dashboard_email_reminder_frequency
+		admin_dashboard_default_most_active
+
+	Add documentation to Emailer
+	Look over front end Admin Dashboard documentation
+	
 	Add sentry error in script
 
 
