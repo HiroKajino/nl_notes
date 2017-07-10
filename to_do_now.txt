@@ -47,25 +47,6 @@ Admin Dashboard Q's
 
 	What changes are made to all the lessons that affects Admin Dashboard and download tracking?
 
-Inaccuracy of usage numbers
-	User original lessons are not recorded as download, obviously. But there are cases when original lessons are heavily used.
-	It won't show as downloaded lessons, but it will be shown as lesson participants
-		'google_user_115689829328145369376' Adair Spence Dublin Wells Middle School
-
-	Some users have lessons downloaded time before tracking started, and she has a copy of the lesson that doesen't come up
-	in Download tracking
-		'google_user_103119424237567443868' Kelly Ball Dubling High  	
-
-	Many users seem to be using the same lessons over and over. These lessons are downloaded long time ago 2015-, and
-	won't show up in downloaded lessons modal. How about changing this to 'used' lesson so that we get to see what lessons
-	are being used as opposed to what lessons are downloaded? Many lessons are downloaded but doesn't mean that they are
-	used.
-		kmaxwell of Maury - Cox: keeps using & creating copies from lessons dowloadd in 2015.
-		J. Rosin of Dublin
-
-	Some teachers keep using lessons downloaded 2+ years ago, and new students have been accessing 'last_opened'
-		-> This causes # of participants high, but the lessons that students are using migt not show up in the dl history modal
-
 
 why no edition info for 'Mmm Mmm Bakery'
 	users download paperversion of the lesson, which doesn't have editions
@@ -169,17 +150,14 @@ Q to Duy/Eng. Team
 	don't set on scheduler email yet -> wa
 
 <Start Here>
-	Add admin_dashbaord related User doc flags to documentation
-		admin_site
-		admin_district
-		receive_admin_dashboard_email_reminder
-		admin_dashboard_email_reminder_frequency
-		admin_dashboard_default_most_active
 
-	Add documentation to Emailer
-	Look over front end Admin Dashboard documentation
-	
-	Add sentry error in script
+Look at client/src/my-nextlesson/components/get-user-info-modal.es6
+templates/homepage2/my-nextlesson => where the modal is loaded and params are passed
+my-nextlesson LN:139 conditions when the modal pops up
+Make it editable so that it can pop up anytime and update info. 
+
+
+Account integration of google user: use email
 
 
 	Lower priority--

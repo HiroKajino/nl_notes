@@ -3,8 +3,11 @@
 :echo @%
 	show current file pathname
 
+:scriptnames
+	show all plugin scripts loaded 
+
 :set showcmd
-	show input in normal mode
+	show input in normal mode on the bottom
 
 :/\c<search_text>
 	case-insensitive search
@@ -15,6 +18,26 @@
 	.   - current line
 	$   - last line of the file
 
+:/<locationA>/;/<locationB>/ <command>
+	move cursor to location A, then to B. Run <command>
+	i.e. :/^CTRL/;/^CTRL/g/co $
+		=> this selects the lines from the first CTRL to the next
+	
+:/<locationA>/,/<locationB>/ <command>
+	the cursor stays where it is 
+	i.e. :/^CTRL/,/^CTRL/g/co $
+		=> this only selects the line wher the first CTRL is 
+
+When searching...
+	\+ -> use it like '+' in regex in other languages
+
+When replacing...
+	\r -> new line
+	&  -> the text that matches search pattern
+
+:read !<bash command>
+	output of <bash command> is written to the buffer
+
 CTRL-B 
         cursor to beginning of command-line
 CTRL-E 
@@ -23,6 +46,9 @@ CTRL-W      Delete the |word| before the cursor.  This depends on the
         'iskeyword' option.
 CTRL-U      Remove all characters between the cursor position and
         the beginning of the line.  
+
+CTRL-R
+		Access register, followed by a number or symbol
 
 == Vim Normal Mode
 '' or ``
@@ -55,3 +81,27 @@ Ctrl + b – move backward one character
 Ctrl + d – delete character under the cursor
 Ctrl + h – delete character before the cursor
 Ctrl + t – swap character under cursor with the previous one
+
+grep -v <pattern> 
+	invert match (does not contain)
+
+find <where> -name <name>
+	<name> has to be a simple regex like '*.html' (can't user '.*' but '*' would do)
+
+find <where> -regex <pattern>
+	find anything that matches the <pattern> in <where>
+
+find <where> -type <flag>
+	flag: f => regular file, d => directory
+
+find <where> -not ....
+	find that doesn't match ...
+
+find <condition> -exec grep <pattern> {} +
+	look for <pattern> inside the results of `find <condition>`, display with its filename 
+	(separate `grep` command runs for each result of `find <condition>`)
+	This is supposed to be the same as how `xargs` command runs.
+
+find <condition> -exec grep <pattern> {} \; 
+	look for <pattern> inside the resutls of `find <condition>`, display without its filename
+	(all of the results of `find <condition>` are given to `grep` command) 
