@@ -149,16 +149,24 @@ Q to Duy/Eng. Team
 	Test Email
 	don't set on scheduler email yet -> wa
 
+
+get-userinfo-modal
+	- the 'force-update-date' is set in my-nextlesson.es6
+	- it makes the user update grades, subjects, and standards
+	- TODO: change text depending on whether user has never entered info / needs updates
+	- Q: What about district info? What about the role?
+
+
 <Start Here>
+Talk to Duy:
+	Google Email linking
+		- remove the clause `if exiting_users_with_same_email:`?
+		- on first time goolge signin, has to query API twice b/c 
+		  first query doesn't give refresh token. Is there a reason why
+		  `access_type=offline` flag is not always used?
+		- is it okay to flag `google_user` as token comes in?
 
-Look at client/src/my-nextlesson/components/get-user-info-modal.es6
-templates/homepage2/my-nextlesson => where the modal is loaded and params are passed
-my-nextlesson LN:139 conditions when the modal pops up
-Make it editable so that it can pop up anytime and update info. 
-
-
-Account integration of google user: use email
-
+		- next is to make existing google user creates username and password?
 
 	Lower priority--
 
