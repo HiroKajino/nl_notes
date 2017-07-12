@@ -157,26 +157,17 @@ get-userinfo-modal
 	- Q: What about district info? What about the role?
 
 
-<Start Here>
-Talk to Duy:
 	Google Email linking
-		- remove the clause `if exiting_users_with_same_email:`?
-		- on first time goolge signin, has to query API twice b/c 
-		  first query doesn't give refresh token. Is there a reason why
-		  `access_type=offline` flag is not always used?
-		- is it okay to flag `google_user` as token comes in?
 
-		- next is to make existing google user creates username and password?
+<Start Here>
+	Set up worker.py logging
+
+	Refactor /oauth/callback method
 
 	Lower priority--
 
 		Add Sentry error to client code?
-		When signing as 'Admin', straight to Admin Dashboard
 		real time activity feed in the page
-
-		Put site_metrics_module_cache script into worker queue instead of running it on Heroku Scheduler
-
-		Try solving the issue of duplicates
 
 		Refactor:
 			MARK2: Consider consolidating this with set_initial_district_and_school_ids
