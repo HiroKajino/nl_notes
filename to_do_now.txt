@@ -5,133 +5,16 @@
 		Original Column
 		checkmark instead of yes/no
 		Emailer is ready (wait til new school year?)
-
-		Fixes:
-			Edge, check fn of 'custom date'
-
-	Questions & Concerns:
-		To show warning that the table data is outside of licence duration, the license date has to be correct.
-			For example, Dublin's license start date is summer 2016 thought they have usage record before that.
-
-		Suggested new tasks:
-			Maybe Downloaded AND Used Lessons Modal instead of just Download?
-				More accurate usage information on what's actually being used online. Include old lessons.
-				Include original lessons, too.
-		
-				Show all lessons owned by the teacher and accessed by anyone (teacher or students) 
-				show same info with 'last used date' instead of 'download_date'
-
-			Consult with E-team:
-				Change Download Tracking to track user_copy id in addition to gid, ref, and edition_v id
-				Is there a reason why 'Making Another Copy' creates a new record but cloning doesn't? 
-				Consolidate the same id downloads, remove later download dates
+		Google account link:w
+		Checked Edge
 				
-
-	FYI:
-		I don't know how other interactive platform DB schema/model are written. This might create a need for adjustment
-		after Ashley/Duy are done with their projects. 
-
-
-Admin Dashboard Q's
-	Dowload relavent but it's not the as accurate of measure as usage data. 
-
-	Download Tracking
-		- Should we get rid of redundancy (remove duplicates download records)?
-			We should not record the download when 'Make Another Copy' is pressed(when the same lesson is dl'ed)
-			It's creating inconsistency b/c when a lesson clone is made, it's not recorded as donwload.
-		- Alternatively, record all creations of copies
-		
-		- When new lessons come live, what happens?
-			interactive worksheet
-			interactive projects
-
-	What changes are made to all the lessons that affects Admin Dashboard and download tracking?
-
-
-why no edition info for 'Mmm Mmm Bakery'
-	users download paperversion of the lesson, which doesn't have editions
-	interactive editions are created
-	user never logged in to NL
-	no interactive rec user copy is created and only paper one exists, but show up as 'interactive' true, because
-		'has_interactive_version' flag is true
-	one such user is pottsj1 in Maury
-	participants info should not matter since paper pt was worksheet
-
-
-Q to Duy/Eng. Team
-	'Make Another Copy' will create a new record in dl tracking, but creating new copy from platform doesn't
-	What happens when paper pt had been downloaded, and the user now access the old lesson?
-		-> how does it affect download tracking, if at all?
-
 == Admin Dashboard ==
-	
-	User Settings:
-		Anyone with dashboard access can change info of non-teacher users
-		if you have site access, no option to flag/unflag district access
-		Remove user type in user settings
-		Add a paragraph to explain what user settings do
-		Sort users by districts
-
-	Custom Active:
-		include all columns in Activity section
-
-	Settings UI:
-		Make tables align
-		'Update' button to the right
-		make 'Account Info' and 'Settings' don't stack
-
-	Documentation
-		Add code_review_script documentation to the js file
-
-=Future Admin Dashboard=
-	Able to see all teachers within the district (UI is concern, but open up for employess)
-	Account Info for Employees
-	Add email address of the teachers in the downloaded csv table
-
-
-	Teacher downloads list
-		loading logo
-		sortable by column(transplant from admin-dashboard)
-		link to the lesson on click
-
-	Find where the NL header is. Some pages don't have the link to admin-dashboard.
-
-	Add participants info
-		interactive pt
-		gameboard 
-
-
-	Higher priority--
-		When opening dl-history-modal for the same user, don't reset variables.
-
-		UI:
-			yes/no on 'interactive'
-			show dl type like downloads table
-			grade & subject singular in dl history details
-			take off line on expanded table row in dl-history
-
-		auto save settings
-		More edits to Admin Dashboard:
-			Close button white in modal in white
-
-		Pending Users:
-			when pending users has the admin access flag, preserve it when it becomes a active account
-		More edits:
-			Loading logo while switching sections:
-				checkout admin-dashboard branch --> even when 'finished_loading_table_data()' is false, 
-				spinner doesn't kick in.
-
-		When the specified timeframe is outside of district license, show message (for expired districts)
-			-> hasn't been deployed
-
-		Check on Edge browser
-
-		Admin Dashboard Emailer
-			user has a flag 'recieves_admin_dashboard_email_alert': T/F
-			flag 'frequency': every_week, every_month, every_2_month, every_3_month
-			'last_received'
-			'See last months activity in your district'
-				as default, link to show last month activity
+	Admin Dashboard Emailer
+		user has a flag 'recieves_admin_dashboard_email_alert': T/F
+		flag 'frequency': every_week, every_month, every_2_month, every_3_month
+		'last_received'
+		'See last months activity in your district'
+			as default, link to show last month activity
 
 	Activity Modal instead of Download history
 		model method get_used_or_downloaded_lessons created
@@ -143,23 +26,23 @@ Q to Duy/Eng. Team
 			Katherine McKenna ==> original flags to be false (2015-16 year)
 			google_user_112215999174643378653 | Green Valley Middle School | katherinem@fsusd.org
 
-	Check Edge function on 'custom date'
-	Set up Email Sender 
 
-	Test Email
-	don't set on scheduler email yet -> wa
-
-
-get-userinfo-modal
+== get-userinfo-modal ==
 	- the 'force-update-date' is set in my-nextlesson.es6
 	- it makes the user update grades, subjects, and standards
 	- TODO: change text depending on whether user has never entered info / needs updates
 	- Q: What about district info? What about the role?
 
-
-	Google Email linking
-
 <Start Here>
+	Make Robomongo readonly 
+
+	Working on Google Account Login
+		Issue with Google OAuth. -> invalid_grant (Invalid code or Code has been redeemed)
+		For some reason, two api calls are made to Google Auth, and the second one fails
+		Still investigating.
+
+	Test it on Edmodo account (especially `offline` flag)
+
 	Talking points with E/D:
 		Now	
 			- Non-google user with google email can't log in with google credentials.
@@ -180,20 +63,14 @@ get-userinfo-modal
 			- On log in, prompt user if he/she wants to create link an account.
 			- User grant permisson through google.
 			- Link accounts
-			-- or --
-			automatically links account and takes the user to dashboard. 
-			- This case, user still has to grant permission to NL, so maybe prompting user
-			  might be a better way to go.
 		
 		More Qs:
 			- What about Edmodo?
+
+		No usertype selection removed from login, preserve in signin
 			
 
 	Lower priority--
-
-		Add Sentry error to client code?
-		real time activity feed in the page
-
 		Refactor:
 			MARK2: Consider consolidating this with set_initial_district_and_school_ids
 			Consider description pop ups into a component or templates
