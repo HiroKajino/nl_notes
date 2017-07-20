@@ -36,38 +36,24 @@
 <Start Here>
 	Make Robomongo readonly 
 
-	Working on Google Account Login
-		Issue with Google OAuth. -> invalid_grant (Invalid code or Code has been redeemed)
-		For some reason, two api calls are made to Google Auth, and the second one fails
-		Still investigating.
+	Coming back to office
+		change local db's name to 'nextlesson_prod'
 
-	Test it on Edmodo account (especially `offline` flag)
-
-	Talking points with E/D:
-		Now	
-			- Non-google user with google email can't log in with google credentials.
-			- if you login with google, and don't have account yet, it will automatically 
-			creates a new account.
-			- OAuth Callback has no way of knowing the intention of the user. It execute
-			actions based on the presence of user document.
-			- When user signs up to create account, he/she needs to select the account 
-			twice, and prompts permission.
-
-		How about
-			- pass 'action' parameter in request to Google auth.
-			- OAuth callback will use the same error handling, and use session['action'] to
-			determine actions (login, creation, linking)
-			- This way, a new account won't be created on login.
-			
-		Account Linking
-			- On log in, prompt user if he/she wants to create link an account.
-			- User grant permisson through google.
-			- Link accounts
-		
-		More Qs:
-			- What about Edmodo?
-
+	Next Tasks
 		No usertype selection removed from login, preserve in signin
+
+	Test Case:
+		requires_auth/optional_auth -> login page 
+			add items to cart, then login/signup to pay
+			go to lesson link direclty, then login/signup
+			try going to restricted page(like 'admin_dashboard'), then login/signup
+		legacy user with multiple accounts with the same email 
+		student users
+		parent users
+		Edmodo account (do they use the same callback?)
+		Ask E-team for other features that could be affected the user's google api addition
+		Traditional login and signup with/without targetpage
+		login and signup from `account doesn't exist` page and `link account` page
 			
 
 	Lower priority--
