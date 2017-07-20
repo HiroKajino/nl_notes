@@ -1,12 +1,11 @@
 == meeting with Erin
 	What's done:
-		Show user activity
-			-> number of participants & submissions are not filtered by the date
-		Original Column
-		checkmark instead of yes/no
-		Emailer is ready (wait til new school year?)
-		Google account link:w
-		Checked Edge
+		Users could create accounts with the same google email with 'email' creation.
+	school year to 7/1 - 6/30
+	Many people have created duplicate email accounts as recently as 7/1
+	total of 1605 such users
+
+	checkout should go to 'login' page instead of 'signup' page
 				
 == Admin Dashboard ==
 	Admin Dashboard Emailer
@@ -33,28 +32,46 @@
 	- TODO: change text depending on whether user has never entered info / needs updates
 	- Q: What about district info? What about the role?
 
-<Start Here>
-	Make Robomongo readonly 
-
-	Coming back to office
-		change local db's name to 'nextlesson_prod'
-
-	Next Tasks
-		No usertype selection removed from login, preserve in signin
-
 	Test Case:
 		requires_auth/optional_auth -> login page 
 			add items to cart, then login/signup to pay
 			go to lesson link direclty, then login/signup
 			try going to restricted page(like 'admin_dashboard'), then login/signup
-		legacy user with multiple accounts with the same email 
-		student users
-		parent users
-		Edmodo account (do they use the same callback?)
-		Ask E-team for other features that could be affected the user's google api addition
 		Traditional login and signup with/without targetpage
 		login and signup from `account doesn't exist` page and `link account` page
-			
+		legacy user with multiple accounts with the same email 
+
+	Error/Fixes
+		Lesson direct link doesn't work for students (probably not for teachers either)
+			-> fixed if for /dashboard route
+			-> fix it too for interactive lessons
+	Test
+<start here>
+		student users
+			-> tested standard login from main page, 
+			-> test direct navigation to lesson, with various login/account-link scenarios
+		parent users
+		with pending user
+		Edmodo account (do they use the same callback?)
+			-> does it affect it? where is oauth callback route for edmodo?
+
+	Tasks/Errors	
+		investigate @route('/students/google/signup')
+		search page header UI looks wierd
+	
+	Ask E-team for other features that could be affected the user's google api addition
+		What does google classroom link look like?
+
+	Usertype selection removed from login, keep it in signin
+		Files to change:
+			t/h/google-signin-error.html
+			login modal	
+			homepage2/account_link_prompt.html
+			homepage2/account_does_not_exist.html
+
+	Start working on Account Info Update Modal
+
+	Starts web API documentation
 
 	Lower priority--
 		Refactor:
