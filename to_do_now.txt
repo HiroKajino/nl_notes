@@ -104,10 +104,17 @@
 	Clean up the login route so that usertype is no longer necessary.
 
 <Start here>
+	Monday: worked on migrating common-core-browser...keep working on it.
+
+
 	Testing is done except for Edmodo users
 
 	Issues:
 		* my-cart page, login modal is not updated with the new one. check the my-cart file to see what js is required
+		* some other pages such as lesson browser don't have the proper sign-in/login modals
+			* my-cart (-> cart page CSS was in old header file. wait until Tim finishes CSS and chnage the header file.)
+			* standards-browser 
+
 		* on sign up modal (signed up google accoutn, then trying to sign up again), 'Click here' link doesnt' work
 
 	Tasks/Errors	
@@ -115,6 +122,7 @@
 		search page header UI looked wierd but maybe resolved on its own - double check to make sure that it has.
 	
 	Test Edmodo users
+	Test Google Classroom link 
 
 	Ask E-team for other features that could be affected the user's google api addition
 		What does google classroom link look like?
@@ -125,6 +133,10 @@
 	Confirm school year start/end
 	Finish Account Info Update Modal
 	Finish Admin Dashboard email	
+
+	Admin Dashboard
+		- user history should include lessons from lesson_user_copies 
+		- Consider changing Download reporting section (how to distinguish lesson types with the new interactive lessons)
 
 	Starts web API documentation
 
