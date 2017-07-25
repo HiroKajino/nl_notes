@@ -1,6 +1,5 @@
 == meeting with Erin
 	What's done:
-		Users could create accounts with the same google email with 'email' creation.
 		school year to 7/1 - 6/30
 
 		on some routes, targetpage was not saved 
@@ -17,9 +16,13 @@
 		Many people have created duplicate email accounts as recently as 7/1 (google login has been causing it)
 		total of 1605 such users
 			no longer able to create a new user with the same google email
+		
+		standard-browser has new login modal
+		my-cart doesn't ('checkout button takes to login screen')
 
 	check:
 		signin error page
+		Edmodo user 5 new users per day! -> shouldn't we make sure that their log in is consistent with Google?
 
 
 				
@@ -103,34 +106,24 @@
 	Usertype selection removed from login, keep it in signin
 	Clean up the login route so that usertype is no longer necessary.
 
-<Start here>
-	Monday: worked on migrating common-core-browser...keep working on it.
-
-
-	Testing is done except for Edmodo users
-
 	Issues:
 		* my-cart page, login modal is not updated with the new one. check the my-cart file to see what js is required
-		* some other pages such as lesson browser don't have the proper sign-in/login modals
-			* my-cart (-> cart page CSS was in old header file. wait until Tim finishes CSS and chnage the header file.)
-			* standards-browser 
-
-		* on sign up modal (signed up google accoutn, then trying to sign up again), 'Click here' link doesnt' work
 
 	Tasks/Errors	
 		investigate @route('/students/google/signup') - make sure that nothing is breaking here
-		search page header UI looked wierd but maybe resolved on its own - double check to make sure that it has.
 	
-	Test Edmodo users
-	Test Google Classroom link 
-
-	Ask E-team for other features that could be affected the user's google api addition
-		What does google classroom link look like?
+<Start here>
+	Test Edmodo login with out usertype
 
 	Add comments to google-acccount-signin
-	Deploy!!
+		google callback route
+			`action` flag	
+	
 
 	Confirm school year start/end
+
+	Deploy!!
+
 	Finish Account Info Update Modal
 	Finish Admin Dashboard email	
 
