@@ -23,7 +23,8 @@
 	check:
 		signin error page
 		Edmodo user 5 new users per day! -> shouldn't we make sure that their log in is consistent with Google?
-
+			Edmodo user log in needs usertype to properly login
+			It auto-create account on log in
 
 				
 == Admin Dashboard ==
@@ -112,24 +113,21 @@
 	Tasks/Errors	
 		investigate @route('/students/google/signup') - make sure that nothing is breaking here
 	
-<Start here>
 	Test Edmodo login with out usertype
 
-	Add comments to google-acccount-signin
-		google callback route
-			`action` flag	
-	
+<Start here>
+	Account Info Update Modal
+		All done except for UI adjustment.
+		Test with multiple scenarios
+		screenshot and show it to Erin.		
 
-	Confirm school year start/end
-
-	Deploy!!
-
-	Finish Account Info Update Modal
 	Finish Admin Dashboard email	
 
 	Admin Dashboard
 		- user history should include lessons from lesson_user_copies 
 		- Consider changing Download reporting section (how to distinguish lesson types with the new interactive lessons)
+
+	Work on Edmodo signup
 
 	Starts web API documentation
 
@@ -141,6 +139,8 @@
 		Performance improvement
 			localStorage(frontend)
 			cache by district (backend)
+
+		Change Edge browser date selector format
 		
 	With E-team
 		Consolidate duplicate teachers with different email addresses
