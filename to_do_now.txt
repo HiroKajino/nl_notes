@@ -1,51 +1,20 @@
 == meeting with Erin
+
 	What's done:
-		school year to 7/1 - 6/30
-
-		on some routes, targetpage was not saved 
-			i.e. login error, old lesson platforms, project_details
-			-fixed
-
-		project_details page -> 'login to downloaed for free' instead of 'signup'
-
-		no more userinfo is necessary for login
-			route changed
-
-		checkout should go to 'login' page instead of 'signup' page
-
-		Many people have created duplicate email accounts as recently as 7/1 (google login has been causing it)
-		total of 1605 such users
-			no longer able to create a new user with the same google email
-		
-		standard-browser has new login modal
-		my-cart doesn't ('checkout button takes to login screen')
 
 	check:
-		signin error page
-		Edmodo user 5 new users per day! -> shouldn't we make sure that their log in is consistent with Google?
-			Edmodo user log in needs usertype to properly login
-			It auto-create account on log in
 
 				
 == Admin Dashboard ==
-	Activity Modal instead of Download history
-		original lesson column
-			Jorge Albarran ==> original flags to be true
-			google_user_116832471028620047361 | Fairfield-Suisun USD Public Safety Academy 
-
-			Katherine McKenna ==> original flags to be false (2015-16 year)
-			google_user_112215999174643378653 | Green Valley Middle School | katherinem@fsusd.org
 
 
 == get-userinfo-modal ==
-	- the 'force-update-date' is set in my-nextlesson.es6
-	- it makes the user update grades, subjects, and standards
-	- TODO: change text depending on whether user has never entered info / needs updates
-	- Q: What about district info? What about the role?
-
 
 
 == Google Signin ==
+	Edmodo login does not work without usertype specified
+	Enable Edmodo login like new Google login
+
 	Test Cases
 		Teacher
 		Student
@@ -53,79 +22,106 @@
 		pending user
 		duplicate email users
 
-	After signing up with email
-		main page:
-			-> login with email
-			-> login Google (goes to account link)
-
-			-> signup with the same email through email signup (it shouldn't let you)
-			-> signup with the same email through Google signup
-				-> account_link
-
-			(account_link)
-				-> proceed to link
+		After signing up with email
+			main page:
 				-> login with email
+				-> login Google (goes to account link)
 
-		access auth-required site:
-			-> test all above cases on
-				interestid
-				checkout
-				interactive lessons
+				-> signup with the same email through email signup (it shouldn't let you)
+				-> signup with the same email through Google signup
+					-> account_link
+
+				(account_link)
+					-> proceed to link
+					-> login with email
+
+			access auth-required site:
+				-> test all above cases on
+					interestid
+					checkout
+					interactive lessons
 
 
-	After signing up with Google
-		main page:
-			-> login Google 
+		After signing up with Google
+			main page:
+				-> login Google 
 
-			-> signup with the same email through email signup (it shouldn't let you)
-			-> signup with the same email through Google signup
-				-> error message, then login with Google 
+				-> signup with the same email through email signup (it shouldn't let you)
+				-> signup with the same email through Google signup
+					-> error message, then login with Google 
 
-		access auth-required site:
-			-> test all above cases on
-				interestid
-				checkout
-				interactive lessons
+			access auth-required site:
+				-> test all above cases on
+					interestid
+					checkout
+					interactive lessons
 
-	After signing in without any email(student only)
+		After signing in without any email(student only)
 
-	With no signup history
-		login from main page:
-			-> login with email
-			-> login Google (goes to account link)
-				=> Fail, account does not exist page
-					-> signup
-					-> login (come back to account fail)
+		With no signup history
+			login from main page:
+				-> login with email
+				-> login Google (goes to account link)
+					=> Fail, account does not exist page
 						-> signup
+						-> login (come back to account fail)
+							-> signup
 
-		access auth-required site:
-			interestid
-			checkout
-			interactive lessons
+			access auth-required site:
+				interestid
+				checkout
+				interactive lessons
 
 == Current Tasks ==
-	Usertype selection removed from login, keep it in signin
-	Clean up the login route so that usertype is no longer necessary.
-
-	Issues:
-		* my-cart page, login modal is not updated with the new one. check the my-cart file to see what js is required
-
-	Tasks/Errors	
-		investigate @route('/students/google/signup') - make sure that nothing is breaking here
-	
-	Test Edmodo login with out usertype
-
 <Start here>
+	Have been testing, finding & fixing issues
+	for teacher w/o district affiliation (no district email) see site selector for some reason.
+
+	Test all over again!
+
 	Account Info Update Modal
 		All done except for UI adjustment.
 		Test with multiple scenarios
-		screenshot and show it to Erin.		
+
+		New user
+			without district email (no site/role setup)
+				- There shouldn't be any 'Update' text
+				=> then activate the school's subscription
+					- modal prompts site and role selection
+
+			with district email
+				- There shouldn't be any 'Update' text
+	
+		Existing user
+			with district info setup (school_district_id & district_id)
+				preferences setup, but outdated
+					with or without role
+					update preferences
+						- site&role pre-selected
+						- 'Update' message instead of 'Set'
+
+				preferences setup, up to date
+					with role -> modal doesn't show
+					without role -> modal shows only for the role
+
+			without district info setup
+				preferences setup, but outdated
+					update only preferences
+
+				preferences setup, up to date
+
+	Issues:
+		on fields that need updating, the buttons show green because the values are not empty.
+
+	Remember to deploy model update
 
 	Finish Admin Dashboard email	
+		Email goes out to only the new users.
 
 	Admin Dashboard
 		- user history should include lessons from lesson_user_copies 
 		- Consider changing Download reporting section (how to distinguish lesson types with the new interactive lessons)
+		- Metrics older than project/activity are hidden for new school year
 
 	Work on Edmodo signup
 
