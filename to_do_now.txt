@@ -1,9 +1,18 @@
 == meeting with Erin
 
 	What's done:
+		inserted email setting 
+			if the user received welcome email within a year, she won't receive it
+			even if she is re-granted access
 
 	check:
+		We delete a user from District Admin page
+		user still has the school email
+		user will be prompted to update her info on the next login, and she gets
+		the subscription under the old email
 
+== meetign with Duy
+	What does 'merge-account' section does in get-user-info modal in my-nextlesson
 				
 == Admin Dashboard ==
 
@@ -73,27 +82,30 @@
 				interactive lessons
 
 == Current Tasks ==
-<Start here>
-	Have been testing, finding & fixing issues
-	for teacher w/o district affiliation (no district email) see site selector for some reason.
-
-	Test all over again!
-
 	Account Info Update Modal
-		All done except for UI adjustment.
 		Test with multiple scenarios
 
-		New user
-			without district email (no site/role setup)
+		without district email (no site/role setup)
+			First login 
+				- There shouldn't be any 'Update' text
+				- no site or roles
+
+			Subsequent login
+				preferences setup, but no last_updated date
+				preferences setup, but outdated
+					update only preferences
+
+				preferences setup, up to date
+
+		with district email
+			First login
 				- There shouldn't be any 'Update' text
 				=> then activate the school's subscription
 					- modal prompts site and role selection
-
-			with district email
-				- There shouldn't be any 'Update' text
 	
-		Existing user
-			with district info setup (school_district_id & district_id)
+			Subsquent login
+				preferences setup, but no last_updated date
+
 				preferences setup, but outdated
 					with or without role
 					update preferences
@@ -104,21 +116,77 @@
 					with role -> modal doesn't show
 					without role -> modal shows only for the role
 
-			without district info setup
-				preferences setup, but outdated
-					update only preferences
-
-				preferences setup, up to date
-
-	Issues:
-		on fields that need updating, the buttons show green because the values are not empty.
-
+			Subsequent login after license expired
+			
 	Remember to deploy model update
 
 	Finish Admin Dashboard email	
-		Email goes out to only the new users.
+		Email goes out to only the new users two days after their account activation.
+			when admin_site or admin_district flags are toggled
+			*'send_admin_dashboard_welcome_email_on' with the date two days from the activation.
+			* when the message has been sent, add 'admin_dashboard_welcome_email_sent_on' flag
+		
+		Test cases
+			Pending user 
+				-> user creates account, and has Admin Dashboard access
+
+			Existing user
+				-> added the district manually
+					as Teacher
+						with access
+						without access
+						Doesn't appear in settings page
+
+					as non-Teacher ()
+						Appear in settings page
+						get appropriate access
+
+			Add pending users from admin page
+				upload one teacher
+				upload many teachers
+					as Teacher
+						with access
+						without access
+						Doesn't appear in settings page
+
+					as non-Teacher ()
+						Appear in settings page
+						get appropriate access
+		
+			** inital email settings
+				alert true, frequency: every_month
+				welcome email flag 
+				confirm in DB 
+				confirm in Admin Dashboard
+
+			Email settings are reflected when changed in Admin dashboard
+			Email settings are not affected when toggling 
+
+			When user loses access to Admin Dashboard their email settings are reset
+				alert flag off
+				alert frequency preserved
+				welcome email off
+
+			When they get it back on, preserves 
+				alert frequency
+				welcome email recieved flag (if any was sent)	
+
+			When removing users from admin district page
+				admin_site/district disabled
+<Start Here>
+	Done:
+		Setting of user with flags to enable email control
+		Refactor so that admin_dashboard access flags are toggled through one route
+	
+	vNext:
+	Document
+
+	Work on Email template
+		email template
+		email sender
 
 	Admin Dashboard
+		TODO: come up with questions to ask to Duy and Ashely
 		- user history should include lessons from lesson_user_copies 
 		- Consider changing Download reporting section (how to distinguish lesson types with the new interactive lessons)
 		- Metrics older than project/activity are hidden for new school year
