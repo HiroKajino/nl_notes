@@ -179,7 +179,8 @@
 		Refactor so that admin_dashboard access flags are toggled through one route
 	
 	vNext:
-	Document
+	Document the new User method
+	Prepare questions for Duy and Ashley
 
 	Work on Email template
 		email template
