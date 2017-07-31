@@ -1,4 +1,7 @@
 == meeting with Erin
+	All teachers see the 'Role' selector regardless
+	check green check marks spacing
+	checkboxes shouldn't turn green until they are updated	
 
 	What's done:
 		inserted email setting 
@@ -14,6 +17,37 @@
 == meetign with Duy
 	What does 'merge-account' section does in get-user-info modal in my-nextlesson
 				
+	New collections
+		- Is there such thing as edition_id for the new collections? How does it track versions?
+			-> no editions for Lesson collections
+			-> if both ref_id and edition_ids are present, it's Interactive PT
+			-> if only ref_id is present, it's Lesson 
+		- anythign different about students answers and submissions?
+			- parent_id in ObjectId
+		- How are `type` or `project_classification` flagged in the new lessons?
+			- lesson_type ->  new but more descriptive types
+
+		-> add parent_id index to Responses&Submission
+
+		Important Note:
+		- Interactive PTs
+			- When a user downloads paper version, and the interactive version becomes available.
+			- When the user access the lesson, it automatically takes him to interactive version.
+			- His download tracking record of this lesson is replaced with the old one.
+			=> The PT downloaded record all point to the newest version. We won't know if lessons were  
+				downloaded as paper first, or interactive first. However, it is treated as 'interactive downloads'
+
+		- other (and new) Interactive lessons 
+			- When a user downloads paper version, and the interactive version becomes available.
+			- When the user access the lesson, it automatically takes him to interactive version.
+			- His download tracking record does not change, and it still points to the old version.
+			=> The downloaded record of paper version will still show as non-interactive download even if 
+				the lesson has been upgraded.
+
+	What will happen when the paper lessons become unaccessible?
+		- documents will still exist? => yes
+		- any values change? => no
+
 == Admin Dashboard ==
 
 
@@ -85,10 +119,13 @@
 	Account Info Update Modal
 		Test with multiple scenarios
 
+
 		without district email (no site/role setup)
 			First login 
 				- There shouldn't be any 'Update' text
 				- no site or roles
+				- all checkboxex gray in the beginning
+				** confirm/adjust checkbox alignments
 
 			Subsequent login
 				preferences setup, but no last_updated date
@@ -97,13 +134,17 @@
 
 				preferences setup, up to date
 
+				** all checkboxex gray in the beginning
+
 		with district email
 			First login
 				- There shouldn't be any 'Update' text
+				- all checkboxex gray in the beginning
 				=> then activate the school's subscription
 					- modal prompts site and role selection
 	
 			Subsquent login
+				** all checkboxex gray in the beginning
 				preferences setup, but no last_updated date
 
 				preferences setup, but outdated
@@ -117,6 +158,9 @@
 					without role -> modal shows only for the role
 
 			Subsequent login after license expired
+
+		parent user
+			prompted to update prefernces, but not the roles
 			
 	Remember to deploy model update
 
@@ -173,16 +217,13 @@
 
 			When removing users from admin district page
 				admin_site/district disabled
-<Start Here>
 	Done:
 		Setting of user with flags to enable email control
 		Refactor so that admin_dashboard access flags are toggled through one route
 	
-	vNext:
-	Document the new User method
-	Prepare questions for Duy and Ashley
-
+<Start Here>
 	Work on Email template
+		workin on bulk_email_sender LN2384
 		email template
 		email sender
 
