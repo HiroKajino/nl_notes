@@ -1,12 +1,11 @@
 == meeting with Erin
-	All teachers see the 'Role' selector regardless
-	check green check marks spacing
-	checkboxes shouldn't turn green until they are updated	
-
 	What's done:
 		inserted email setting 
 			if the user received welcome email within a year, she won't receive it
 			even if she is re-granted access
+
+		emailer ready to go
+		Need front end design
 
 	check:
 		We delete a user from District Admin page
@@ -221,18 +220,22 @@
 		Setting of user with flags to enable email control
 		Refactor so that admin_dashboard access flags are toggled through one route
 	
-<Start Here>
 	Work on Email template
-		workin on bulk_email_sender LN2384
-		email template
-		email sender
+		Email sent fine, but template needs adjusting 
+		create text template
+	
+	Deploy!
 
+<Start Here>
 	Admin Dashboard
-		TODO: come up with questions to ask to Duy and Ashely
-		- user history should include lessons from lesson_user_copies 
-		- Consider changing Download reporting section (how to distinguish lesson types with the new interactive lessons)
-		- Metrics older than project/activity are hidden for new school year
-
+		- backend is almost done
+		- write utils.get_interactive_lesson_info_by_usercopy_id
+		- setup get_details_for_downloaded_lesson route in admin_dashboard.py
+		- test
+		- frontend modifications
+	
+	Remember to update model
+	
 	Work on Edmodo signup
 
 	Starts web API documentation
