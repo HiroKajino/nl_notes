@@ -8,10 +8,6 @@
 		Need front end design
 
 	check:
-		We delete a user from District Admin page
-		user still has the school email
-		user will be prompted to update her info on the next login, and she gets
-		the subscription under the old email
 
 == meetign with Duy
 	What does 'merge-account' section does in get-user-info modal in my-nextlesson
@@ -226,15 +222,29 @@
 	
 	Deploy!
 
-<Start Here>
 	Admin Dashboard
-		- backend is almost done
-		- write utils.get_interactive_lesson_info_by_usercopy_id
-		- setup get_details_for_downloaded_lesson route in admin_dashboard.py
-		- test
-		- frontend modifications
+		user history modal
+<Start Here>
+			-> now testing: same new/old lessons consolidated
+				-> lesson details gives 503 error on interactive pt of adkisonc | Santa Fe Unit School | adkisonc@mauryk12.org in Maury
+			-> pariticipations number filtered by the date
+			-> default school year is 17-18
+
+		see more tasks in Erin's meeting doc	
+		Track students' Lesson views on the new platform
+		Download: change 'interactive' column
+		district log shows when NL employees access
+		Project/activity column hidden after 7/1
+
+		investigate user with no access history but download is there
 	
 	Remember to update model
+
+	Before deploy:
+		add index to Lesson collections
+			parent_id to Response and Submission
+		run script to populate cache
+		change default school year to 2017-18
 	
 	Work on Edmodo signup
 
