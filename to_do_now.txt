@@ -232,28 +232,34 @@
 		Download: change 'interactive' column
 		district log shows when NL employees access
 
-<Start Here>
 		insert keen tracking on interactive submission of new lessons
 		Project/activity column hidden after 7/1
 
+<Start Here>
 		investigate user with no access history but download is there
 	
+	Note:
+		Can't distinguish between old & new platform participants	
+		Last Access shows the last page view. If not present, show `last_login`(last time viewed my-nextlesson)
+
 	Remember to update model 
 
 	Before deploy:
 		change UI in user history modal
-			participants_in_older_version flag
+			participants_in_older_version flag(done)
 		add index to Lesson collections
 			beta_platform_lesson_id in Gamboard (done)
 			parent_id to Response and Submission
 			owner_id to LessonUserCopy
 		run script to populate cache
-		change default school year to 2017-18
-		change cache script to include 2017-18
+		change default school year to 2017-18(done)
+		change cache script to include 2017-18(done)
 
 	After deploy:
 		test access to new lesson platform(keen wrapper inserted)
 	
+	Admin Dashboard footer/header fix (changing width)
+
 	Work on Edmodo signup
 
 	Starts web API documentation

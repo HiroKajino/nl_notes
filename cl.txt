@@ -1,13 +1,22 @@
+Admin Dashboard
+a new browser interface for School Administrators to view teacher and students activity and usage of our product with ability to filter and aggregate metrics. 
 
-Dear InfoFlux Hiring Team
+Designed a logical data flow from database, app server, and to client that allow high performance and maintainability.
 
-My name is Hiro Kajion, and I would like to be considered for the Enterprise Technical Support Engineer at InfluxData. I am so excited to find a great position where I can combine my engineering experiences, proven communication skills, and crave for learning in a cutting-edge database tech company. 
+Created a new set of modules to aggregate data from multiple internal and third-party databases and separated the data collection logic from Controller and Model.
 
-In my current role as a full stack web developer at NextLesson, an ed-tech company, I design, implement, and maintain our web app features (please see the resume for my full qualifications). I have proven my ability to become productive in unfamiliar code base and frameworks quickly, as well as hunger for new knowledge and opportunities. Having had a previous career as teacher and manager, I feel confortable in speaking about difficult issues in truthfully with empathy and have had success in communication both as technical and non-technical roles. 
+Transferred data stored in underutilized third party database service to internal database to reduce operational cost and latency.
 
-I am looking for an opportunity where I can expand my skill sets from exposure to top notch engineering and buisiness practices. 
+Designed and implemented a multi-layer cache system to allow shorter loading time and high filterability of data.
 
-I am a self-motivated individual looking for a new opportunity to grow and a place to contribute. I would love to have a chance to meet with your team and be considered for employment. 
+Created dynamic client side script and templates that adapts quickly to changing UI requirements.
 
 
-Thank you for your attention. I am looking forward to hearing from you.
+
+Working directly with Product Manager, exchanged ideas on user and buisness needs, intuitive UI/UX, and engineering limitations.
+
+Proposed bi-weekly code review to the engineering team and frequently volunteered to share my work for feedback and knolwdge sharing.
+
+Added a new unit test module that sets up and tear down local test database automatically without changing existing test scripts. Increased test coverage by 10%.
+
+
