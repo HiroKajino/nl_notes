@@ -1,6 +1,6 @@
 Admin Dashboard
 a new browser interface for School Administrators to view teacher and students activity and usage of our product with ability to filter and aggregate metrics. 
-
+	
 Designed a logical data flow from database, app server, and to client that allow high performance and maintainability.
 
 Created a new set of modules to aggregate data from multiple internal and third-party databases and separated the data collection logic from Controller and Model.
